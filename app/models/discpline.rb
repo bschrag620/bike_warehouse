@@ -1,2 +1,0 @@
-class Discpline < ApplicationRecord
-end
