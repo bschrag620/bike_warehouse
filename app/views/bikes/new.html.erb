@@ -1,0 +1,6 @@
+<h1>Add Bike</h1>
+<%= form_for @bike do |f| %>
+	<%= f.label :manufacturer %>
+	<%= render :partial =>  'partials/autocomplete', :locals => { f: f, category: :manufacturer } %>	
+  
+<% end %>
