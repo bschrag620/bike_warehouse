@@ -1,6 +1,7 @@
+<%= f.label category %>
 <%= f.text_field category, list: "#{category.to_s}_autocomplete" %>
 <datalist id="<%= category.to_s %>_autocomplete">
 	<% Bike.all_(category).each do |v| %>
 		<option value="<%= v %>"></option>
 	<% end %>
-</datalist>	
+</datalist><br>

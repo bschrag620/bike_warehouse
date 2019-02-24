@@ -4,7 +4,8 @@ class CreateBikes < ActiveRecord::Migration[5.2]
       t.string :manufacturer
       t.string :frame
       t.integer :year
-      t.string :componenets
+      t.integer :serial
+      t.string :components
       t.integer :size
       t.integer :price
       t.string :color
