@@ -1,0 +1,2 @@
+class Discpline < ApplicationRecord
+end
