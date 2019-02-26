@@ -17,12 +17,36 @@ class BikesController < ApplicationController
 		@bike = Bike.find(params[:id])
 	end
 
-	def edit
+	def index(sort_by: nil)
+		if !params[:sort_by].nil?
+			category = params[:sort_by].split('_')[0]
+			direction = params[:sort_by].split('_')[1]
 
+			@bikes = Bike.order_by(category, direction)
+			if direction == "asc"
+				@direction = "desc"
+			else
+				@direction = "asc"
+			end
+		else
+			@bikes = Bike.all
+			@direction = "asc"
+		end
+	end
+
+
+	def edit
+		@bike = Bike.find(params[:id])
 	end
 
 	def update
-
+		@bike = Bike.find(params[:id])
+		@bike.update(bike_params)
+		if @bike.save
+			redirect_to bike_path(@bike)
+		else
+			render :edit
+		end
 	end
 
 	def destroy
@@ -33,11 +57,8 @@ class BikesController < ApplicationController
 	def bike_params
 		params.require(:bike)
 			.permit(
-			:manufacturer, :frame, :components, 
-			:color, :serial, :year, :price, discipline_ids:[])
-	end
-
-	def discipline_params
-		params.require(:discipline).permit(:names)
+				:frame_id, :components, 
+				:color, :serial, :year, 
+				:price, discipline_ids:[])
 	end
 end

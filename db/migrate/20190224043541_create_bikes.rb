@@ -1,8 +1,7 @@
 class CreateBikes < ActiveRecord::Migration[5.2]
   def change
     create_table :bikes do |t|
-      t.string :manufacturer
-      t.string :frame
+      t.string :frame_id
       t.integer :year
       t.integer :serial
       t.string :components

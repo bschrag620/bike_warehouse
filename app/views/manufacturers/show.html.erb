@@ -1,0 +1,7 @@
+<h1><%= @man.name %></h1>
+<ul>
+	<% @man.frames.each do |m| %>
+		<li><%= m.name %></li>
+	<% end %>
+</ul>
+<%= link_to "Edit Manufacturer", edit_manufacturer_path(@man) %>

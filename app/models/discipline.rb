@@ -1,6 +1,6 @@
 class Discipline < ApplicationRecord
-	has_many :bike_disciplines
-	has_many :bikes, through: :bike_disciplines
+	has_many :frame_disciplines
+	has_many :frames, through: :frame_disciplines
 
 	def self.mass_create(names)
 		names.split(' ').collect do |name|

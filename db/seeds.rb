@@ -5,15 +5,34 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-dura_ace = "Dura Ace"
-ultegra = "Ultegra"
-sram_red = "SRAM Red"
+trek = Manufacturer.create(:name => "Trek")
+specialized = Manufacturer.create(:name => "Specialized")
 
 road = Discipline.create(:name => "road")
 mtb = Discipline.create(:name => 'mtb')
 aero = Discipline.create(:name => "aero")
+endurance = Discipline.create(:name => "endurance")
 tt = Discipline.create(:name => 'tt')
 
-Bike.create(:year => 2018, :size => 56, :manufacturer => "Specialized", :color => "white", :components => dura_ace, :frame => "Venge", :discipline_ids => [1, 3], :price => "8000")
-Bike.create(:year => 2018, :size => 56, :manufacturer => "Specialized", :color => "white", :components => dura_ace, :frame => "Venge", :discipline_ids => [1, 3], :price => "8000")
-Bike.create(:manufacturer => "Trek", :color => "blue")
+
+venge = specialized.frames.build(:name => "Venge")
+venge.disciplines << [road, aero]
+venge.save
+tarmac = specialized.frames.build(:name => "Tarmac")
+tarmac.disciplines << [road]
+tarmac.save
+madone = trek.frames.build(:name => "Madone")
+madone.disciplines << [road, aero]
+madone.save
+domane = trek.frames.build(:name => "Domane")
+domane.disciplines << [road, endurance]
+domane.save
+
+dura_ace = "Dura Ace"
+ultegra = "Ultegra"
+sram_red = "SRAM Red"
+
+Bike.create(:year => 2018, :size => 56, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
+Bike.create(:year => 2018, :size => 57, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
+Bike.create(:year => 2016, :size => 58, :frame_id => madone.id, :color => "blue", :components => ultegra, :price => "5000")
+Bike.create(:year => 2016, :size => 56, :frame_id => domane.id, :color => "blue", :components => ultegra, :price => "5000")

@@ -1,19 +1,16 @@
-<%= autocomplete(:manufacturer, f) %>
-<%= autocomplete(:frame, f) %>
+<% Manufacturer.all.each do |man| %>
+	<div class="col"><h3><%= man.name %></h3></div>
+	<% man.frames.each do |frame| %>
+		<%= f.radio_button :frame_id, frame.id %><%= frame.name %> <br>
+	<% end %>
+<% end %> <br>
+<div class="hint">* To add new manufacturers/frames, follow this <%= link_to "link", new_manufacturer_path(:redirect => new_bike_path) %></div>
 <%= autocomplete(:components, f) %>
 <%= autocomplete(:color, f) %>
 <%= label_text(:serial, f) %>
 <i class="hint">* leave blank to autofill serial with Time.now</i><br>
 <%= label_text(:year, f) %>
 <%= label_text(:price, f) %>
-
-<%= f.label :discipline_ids, "Choose disciplines:"%> <br>
-<%= f.collection_check_boxes :discipline_ids, Discipline.all, :id, :name %> <br>
-or enter new disciplines. <br>
-Multiple disciplines can be added <br>
-(ex: cyclocross gravel off-road would add 3 discplines) <br>
-<%= label_tag "discpline[names]", "Disciplines"%>
-<%= text_field_tag "discipline[names]" %> <br>
 
 <!--
 t.string "manufacturer"
