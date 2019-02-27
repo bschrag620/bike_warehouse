@@ -1,7 +1,7 @@
 <h1>Edit Manufacturer</h1>
 <div class="info">Frames and manufacturers can only be deleted if there are no bikes in the database associated with them.</div>
 
-<%= form_for @man do |f| %>
+<%= form_for [:admin, @man] do |f| %>
 	<%= render 'form', man: @man, f: f %>
 	<%= submit_tag "Edit Manufacturer" %>
 <% end %>

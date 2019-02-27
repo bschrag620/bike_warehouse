@@ -4,4 +4,10 @@
 		<li><%= m.name %></li>
 	<% end %>
 </ul>
-<%= link_to "Edit Manufacturer", admin_edit_manufacturer_path(@man) %>
+Total bikes in inventory: <%= Bike.by_manufacturer(@man.name).count %> <br>
+<%= link_to "Edit Manufacturer",edit_admin_manufacturer_path(@man) %> <br>
+<% if Bike.by_manufacturer(@man.name).count == 0 %>
+	<%= link_to "Delete Manufacturer", admin_manufacturer_path(@man), :method => "delete" %>
+<% else %>
+	Delete disabled while bike exist in inventory for <%= @man.name %>
+<% end %>

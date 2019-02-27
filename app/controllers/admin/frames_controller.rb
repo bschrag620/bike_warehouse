@@ -1,4 +1,4 @@
-class Admin::FramesController < ApplicationController
+class Admin::FramesController < Admin::BaseController
 	include CustomRedirect
 
 	def destroy

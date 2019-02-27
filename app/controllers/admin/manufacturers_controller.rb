@@ -1,4 +1,4 @@
-class Admin::ManufacturersController < ApplicationController
+class Admin::ManufacturersController < Admin::BaseController
 
 	include CustomRedirect
 
@@ -27,7 +27,7 @@ class Admin::ManufacturersController < ApplicationController
 			if redirect?
 				redirect_to clear_redirect
 			else
-				redirect_to manufacturers_path
+				redirect_to admin_manufacturers_path
 			end
 		else
 			render :new
@@ -39,14 +39,18 @@ class Admin::ManufacturersController < ApplicationController
 		params[:manufacturer][:frame_ids] += @man.frame_ids
 		@man.update(manufacturer_params)
 		if @man.save
-			redirect_to manufacturer_path(@man)
+			redirect_to admin_manufacturer_path(@man)
 		else
 			render :edit
 		end
 	end
 
-	def delete
+	def destroy
+		@man = Manufacturer.find(params[:id])
+		flash[:message] = "#{@man.name} has been deleted."
+		@man.destroy
 
+		redirect_to admin_manufacturers_path
 	end
 
 	private

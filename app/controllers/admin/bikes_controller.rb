@@ -1,4 +1,4 @@
-class Admin::BikesController < ApplicationController
+class Admin::BikesController < Admin::BaseController
 	def new
 		@bike = Bike.new
 	end
