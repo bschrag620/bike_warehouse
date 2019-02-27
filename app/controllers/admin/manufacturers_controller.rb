@@ -1,13 +1,13 @@
 class Admin::ManufacturersController < Admin::BaseController
 
-	include CustomRedirect
-
 	def show
 		@man = Manufacturer.find(params[:id])
 	end
 
 	def index
 		@manufacturers = Manufacturer.all
+
+		render 'manufacturers/index'
 	end
 
 	def edit

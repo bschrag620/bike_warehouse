@@ -1,5 +1,4 @@
 class FramesController < ApplicationController
-	include CustomRedirect
 
 	def index
 		@frames = Frame.all

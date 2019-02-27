@@ -1,0 +1,10 @@
+<h1>View Inventory</h1>
+<h3><%= link_to "View all bikes", admin_bikes_path %></h3>
+<h3>View bikes by manufacturer: </h3>
+<% Manufacturer.all.each do |m| %>
+	<%= link_to m.name, choose_link(manufacturer_bikes_path(m)) %>	<br>
+<% end %> <br>
+<h3>View bikes by discipline: </h3>
+<% Discipline.all.each do |d| %>
+	<%= link_to d.name, choose_link(discipline_bikes_path(d)) %> <br>
+<% end %>

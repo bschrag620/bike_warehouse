@@ -16,4 +16,12 @@ module ManufacturerHelper
 	def frame_total_count(name)
 		Bike.by_frame(name).count
 	end
+
+	def link_to_admin_or_user(man)
+		if is_admin?
+			link_to("Edit", edit_admin_manufacturer_path(man))
+		else
+			link_to("View #{man.name} page", manufacturer_path(man))
+		end
+	end
 end

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BikeWarehouse</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>BikeWarehouse</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
   <body>
-    Hey admin
+    <h1>Admin Panel</h1>
+    <div class="nav">
+      <%= link_to "Admin Home", admin_path %>
+      <%= link_to "View inventory", admin_base_path %>
+      <%= link_to "Edit inventory", admin_base_edit_path %>
+      <%= link_to "View transaction history", admin_path %> 
+    </div>
     <%= yield %>
   </body>
 </html>

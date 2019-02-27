@@ -3,7 +3,7 @@
 <% if man.frames.count > 0 %>
 	<%= render 'display_edit_manufacturer', man: man %>
 <% end %>
-<h3>Frames can be chosen to associate with this manufacturer.</h3>
+<h3>Choose other frames to associate with this manufacturer.</h3>
 <ul>
 	<div class="hint">* frames can ONLY be associate with ONE manufacturer, so chooing one below will remove the association from the other manufacturer.</div>
 	<%= f.label :frame_ids, :hidden => true %>

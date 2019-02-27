@@ -11,7 +11,7 @@ module CustomRedirect
 		end
 
 		def clear_redirect
-			session.delete(:redirect)
+			redirect_to session.delete(:redirect)
 		end
 	end
 end

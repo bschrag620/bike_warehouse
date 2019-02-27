@@ -23,6 +23,6 @@ class Frame < ApplicationRecord
 	end
 
 	def total_count
-		Frame.all.where("id = ?", self.id).count
+		Bike.all.where("frame_id = ?", self.id).count
 	end
 end

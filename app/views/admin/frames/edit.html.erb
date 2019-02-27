@@ -1,5 +1,5 @@
 <h1>Edit Frame</h1>
-<%= form_for @frame do |f| %>
+<%= form_for [:admin, @frame] do |f| %>
 	<%= render 'form', f: f %>
 	<%= submit_tag "Edit Frame" %>
 <% end %>

@@ -1,7 +1,5 @@
 class ManufacturersController < ApplicationController
-
-	include CustomRedirect
-
+	
 	def show
 		@man = Manufacturer.find(params[:id])
 	end

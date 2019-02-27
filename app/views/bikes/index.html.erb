@@ -1,11 +1,16 @@
 <h1>All Bikes</h1>
 <table>
 	<tr>
-		<th><h3><%= sort_by_link("Manufacturer", @direction) %></h3></th>
-		<th><h3><%= sort_by_link("Frame", @direction) %></h3></th>
-		<th><h3><%= sort_by_link("Size", @direction) %></h3></th>
-		<th><%= sort_by_link("Components", @direction) %></th>
-		<th><%= sort_by_link("Price", @direction) %></th>
+		<th><h3><%= "Manufacturer" %></h3></th>
+		<th><h3><%= "Frame" %></h3></th>
+		<th><h3><%= "Size" %></h3></th>
+		<th><%= "Components" %></th>
+		<th><%= "Price" %></th>
+		<% if is_admin? %>
+			<th>Part number</th>
+			<th>Serial number</th>
+			<th></th>
+		<% end %>
 		<th></th>
 	</tr>
 <% @bikes.each do |bike| %>
@@ -15,7 +20,13 @@
 		<td><%= bike.size %></td>
 		<td><%= bike.components %></td>
 		<td><%= bike.price %></td>
-		<td><%=link_to "View", bike_path(bike) %></td>
+		<% if is_admin? %>
+			<td><%= bike.part_number %></td>
+			<td><%= bike.serial %></td>
+			<td><%= link_to "Edit", edit_admin_bike_path(bike) %></td>
+
+		<% end %>
+		<td><%=link_to "View", choose_link(bike_path(bike)) %></td>
 	</tr>
 <% end %>
 </table>

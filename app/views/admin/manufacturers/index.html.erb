@@ -1,9 +1,0 @@
-<h1>Manufacturers</h1>
-<% @manufacturers.each do |man| %>
-	<%= link_to man.name, admin_manufacturer_path(man) %>
-	<ul>
-		<% man.frames.each do |f| %>
-			<li><%= f.name %></li>
-		<% end %>
-	</ul>
-<% end %>

@@ -1,4 +1,5 @@
 class Admin::BikesController < Admin::BaseController
+
 	def new
 		@bike = Bike.new
 	end
@@ -8,7 +9,6 @@ class Admin::BikesController < Admin::BaseController
 		@bike.set_serial
 		
 		if @bike.save
-			binding.pry
 			redirect_to admin_bike_path(@bike)
 		else
 			binding.pry
@@ -18,23 +18,29 @@ class Admin::BikesController < Admin::BaseController
 
 	def show
 		@bike = Bike.find(params[:id])
+
+		render 'bikes/show'
 	end
 
-	def index(sort_by: nil)
-		if !params[:sort_by].nil?
-			category = params[:sort_by].split('_')[0]
-			direction = params[:sort_by].split('_')[1]
+	def index
 
-			@bikes = Bike.order_by(category, direction)
-			if direction == "asc"
-				@direction = "desc"
-			else
-				@direction = "asc"
-			end
-		else
-			@bikes = Bike.all
-			@direction = "asc"
-		end
+		#if !params[:sort_by].nil?
+		#	category = params[:sort_by].split('_')[0]
+		#	direction = params[:sort_by].split('_')[1]
+
+		#	@bikes = Bike.order_by(category, direction)
+		#	if direction == "asc"
+		#		@direction = "desc"
+		#	else
+		#		@direction = "asc"
+		#	end
+		#else
+		#	@bikes = Bike.all
+		#	@direction = "asc"
+		#end
+		@bikes = Bike.all
+
+		render '/bikes/index'
 	end
 
 

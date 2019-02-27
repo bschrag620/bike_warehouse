@@ -3,9 +3,27 @@ Rails.application.routes.draw do
 
 	resources :bikes, :manufacturers, :frame, only: [:show, :index]
 
-	namespace :admin do
-		resources :bikes, :manufacturers, :frames
+	resources :disciplines do
+		resources :bikes, only: [:index]
 	end
 
-  get '/bikes/sort_by/:sort_by', to: 'bikes#index', as: 'sort_bikes'
+	resources :manufacturers do
+		resources :bikes, only: [:index]
+	end
+
+	namespace :admin do
+		resources :bikes
+		resources :manufacturers do
+			resources :bikes, only: [:index]
+		end
+		resources :frames do
+			resources :bikes, only: [:index]
+		end
+		resources :discipline do
+			resources :bikes, only: [:index]
+		end
+		get '', to: 'base#index'
+		get '/inventory', to: 'base#inventory', as: 'base'
+		get '/inventory/edit', to: 'base#edit', as: 'base_edit'
+	end
 end
