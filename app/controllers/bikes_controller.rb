@@ -1,17 +1,4 @@
 class BikesController < ApplicationController
-	def new
-		@bike = Bike.new
-	end
-
-	def create
-		@bike = Bike.create(bike_params)
-		@bike.set_serial
-		if !discipline_params[:names].nil?
-			@bike.discipline_ids += Discipline.mass_create(discipline_params[:names])
-		end
-		@bike.save
-		redirect_to bike_path(@bike)
-	end
 
 	def show
 		@bike = Bike.find(params[:id])
@@ -32,33 +19,5 @@ class BikesController < ApplicationController
 			@bikes = Bike.all
 			@direction = "asc"
 		end
-	end
-
-
-	def edit
-		@bike = Bike.find(params[:id])
-	end
-
-	def update
-		@bike = Bike.find(params[:id])
-		@bike.update(bike_params)
-		if @bike.save
-			redirect_to bike_path(@bike)
-		else
-			render :edit
-		end
-	end
-
-	def destroy
-
-	end
-
-	private
-	def bike_params
-		params.require(:bike)
-			.permit(
-				:frame_id, :components, 
-				:color, :serial, :year, 
-				:price, discipline_ids:[])
 	end
 end

@@ -1,0 +1,9 @@
+<%= render 'partials/errors', obj: @frame, f: f %>
+<%= label_text(:name, f) %>
+<h3><%= label_tag :manufacturer_id %></h3>
+<%= collection_radio_buttons :frame, :manufacturer_id, Manufacturer.all, :id, :name %><br>
+<h3><%= label_tag :discipline_ids, "Disciplines" %></h3>
+<%= collection_check_boxes :frame, :discipline_ids, Discipline.all, :id, :name %><br>
+<h3><%= label_tag "discipline[names]", "Enter new disciplines" %></h3>
+<div class="hint">* multiple disciplines can be seperated by a comma</div>
+<%= text_field_tag "discipline[names]" %>

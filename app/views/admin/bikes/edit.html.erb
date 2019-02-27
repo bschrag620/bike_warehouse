@@ -1,0 +1,5 @@
+<h1>Edit Bike</h1>
+<%= form_for @bike do |f| %>
+	<%= render 'form', bike: @bike, f: f %>
+	<%= submit_tag %>
+<% end %>

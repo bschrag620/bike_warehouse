@@ -1,0 +1,17 @@
+<h3>Current frames</h3>
+<table>
+	<tr>
+		<th>Frame <br>name</th>
+		<th>Qty in<br>Inventory</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% man.frames.each do | frame | %>
+		<tr>
+			<td><%= frame.name %></td>
+			<td align="center"><%= frame_total_count(frame.name) %></td>
+			<td><%= link_to "Edit", edit_admin_frame_path(frame, :redirect => edit_admin_manufacturer_path(man)) %></td>	
+			<td><%= deletable?(frame, man) %></td>			
+		</tr>
+	<% end %>
+</table>	

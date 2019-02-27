@@ -1,0 +1,26 @@
+<%= render 'partials/errors', obj: bike, f: f %>
+<% Manufacturer.all.each do |man| %>
+	<div class="col"><h3><%= man.name %></h3></div>
+	<% man.frames.each do |frame| %>
+		<%= f.radio_button :frame_id, frame.id %><%= frame.name %> <br>
+	<% end %>
+<% end %> <br>
+<div class="hint">* To add new manufacturers/frames, follow this <%= link_to "link", new_admin_manufacturer_path(:redirect => new_admin_bike_path) %></div>
+<%= autocomplete(:components, f) %>
+<%= autocomplete(:color, f) %>
+<%= label_text(:serial, f) %>
+<i class="hint">* leave blank to autofill serial with Time.now</i><br>
+<%= label_text(:year, f) %>
+<%= label_text(:size, f) %>
+<%= label_text(:price, f) %>
+
+<!--
+t.string "manufacturer"
+t.string "frame"
+t.integer "year"
+t.integer "serial"
+t.string "componenets"
+t.integer "size"
+t.integer "price"
+t.string "color"
+-->

@@ -9,7 +9,7 @@ module ManufacturerHelper
 
 	def deletable?(frame, man)
 		if frame_total_count(frame.name) == 0
-			link_to("Delete", frame_path(frame, :redirect => edit_manufacturer_path(man)), :method => 'delete')
+			link_to("Delete", admin_frame_path(frame, :redirect => edit_admin_manufacturer_path(man)), :method => 'delete')
 		end
 	end
 

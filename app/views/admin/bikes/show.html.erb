@@ -1,0 +1,12 @@
+<h1><%= @bike.full_name %></h1>
+<ul>
+	<li>Components: <%= @bike.components %></li>
+	<li>Size: <%= @bike.size %></li>
+	<li>Color: <%= @bike.color %></li>
+	<li>Disciplines: <%= @bike.discipline_names %></li>
+	<li>Part number: <%= @bike.part_number %></li>
+	Qty available: <%= @bike.exact_match.count %>
+</ul>
+<h3>$<%= @bike.price %></h3>
+
+***Add to cart or edit depending on user permissions***

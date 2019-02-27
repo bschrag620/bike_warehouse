@@ -1,0 +1,21 @@
+<h1>All Bikes</h1>
+<table>
+	<tr>
+		<th><h3><%= sort_by_link("Manufacturer", @direction) %></h3></th>
+		<th><h3><%= sort_by_link("Frame", @direction) %></h3></th>
+		<th><h3><%= sort_by_link("Size", @direction) %></h3></th>
+		<th><%= sort_by_link("Components", @direction) %></th>
+		<th><%= sort_by_link("Price", @direction) %></th>
+		<th></th>
+	</tr>
+<% @bikes.each do |bike| %>
+	<tr>
+		<td><%= bike.manufacturer_name %></td>
+		<td><%= bike.frame_name %></td>
+		<td><%= bike.size %></td>
+		<td><%= bike.components %></td>
+		<td><%= bike.price %></td>
+		<td><%=link_to "View", admin_bike_path(bike) %></td>
+	</tr>
+<% end %>
+</table>
