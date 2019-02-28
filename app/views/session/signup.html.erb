@@ -1,0 +1,13 @@
+<h1>Sign up</h1>
+<%= render_errors(@user) %>
+<%= form_for @user do |f| %>
+	<%= label_text(:username, f) %>
+	<%= label_password(:password, f) %>
+	<%= label_password(:password_confirmation, f) %>
+	<%= label_text(:email, f) %>
+	<%= label_text(:phone_number, f) %>
+	<%= label_tag :is_admin, "Are you an admin?" %>
+	<%= f.check_box(:is_admin) %>
+	<div class="hint">* admins can't purchase things...</div>
+	<%= submit_tag "Create account" %>
+<% end %>

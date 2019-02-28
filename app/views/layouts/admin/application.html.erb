@@ -11,6 +11,9 @@
 
   <body>
     <h1>Admin Panel</h1>
+    <% if logged_in? %>
+      <p>Hello, <%= current_user.username %> <%= logout_link %></p>
+    <% end %>
     <div class="nav">
       <%= link_to "Admin Home", admin_path %>
       <%= link_to "View inventory", admin_base_path %>

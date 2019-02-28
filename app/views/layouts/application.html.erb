@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
   <head>
     <title>BikeWarehouse</title>
@@ -10,7 +10,19 @@
   </head>
 
   <body>
-    Hey there.
+    <% if logged_in? %>
+      <p>Welcome back to the Bike Warehouse, <%= current_user.username %> <%= logout_link %></p>
+      <div class="nav">
+        
+      </div>
+    <% else %>
+      <h1>Welcome to the Bike Warehouse</h1>
+      <div class="nav">
+        <%= link_to "Sign up", signup_path %>
+        <%= render 'session/login' %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
