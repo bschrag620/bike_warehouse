@@ -34,26 +34,20 @@ class SessionController < ApplicationController
 	end
 
 	def logout
-		session.delete(:user_id)
-		session.delete(:cart)
+		logout
+		clear_cart
 		redirect_to root_path
 	end
+
+	def clear_cart
+		session.delete(:cart)
+	end	
 
 	def session_login(user)
 		session[:user_id] = user.id
 	end
 
-	def sanitize_cart
-		cart.each do |item|
-			if item.nil?
-				cart.delete(item)
-			end
-		end
-		session[:cart] = cart
-	end
-
 	def add_to_cart
-		binding.pry
 		cart << params[:product_id]
 		session[:cart] = cart
 

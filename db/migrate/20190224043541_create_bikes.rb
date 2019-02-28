@@ -7,9 +7,9 @@ class CreateBikes < ActiveRecord::Migration[5.2]
       t.string :components
       t.integer :size
       t.string :part_number
-      t.boolean :is_available
-      t.boolean :in_cart
-      t.boolean :sold
+      t.boolean :is_available, :default => true
+      t.boolean :in_cart, :default => false
+      t.boolean :sold, :default => false
       t.integer :price
       t.string :color
 

@@ -34,5 +34,6 @@ sram_red = "SRAM Red"
 
 Bike.create(:year => 2018, :size => 56, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
 Bike.create(:year => 2018, :size => 57, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
+Bike.create(:year => 2018, :size => 57, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
 Bike.create(:year => 2016, :size => 58, :frame_id => madone.id, :color => "blue", :components => ultegra, :price => "5000")
 Bike.create(:year => 2016, :size => 56, :frame_id => domane.id, :color => "blue", :components => ultegra, :price => "5000")

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < SessionController
 	def new
 		@user = User.new
 		render 'session/signup'
@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
-			binding.pry
 			session_login(@user)
 		else
 			render 'session/signup'
