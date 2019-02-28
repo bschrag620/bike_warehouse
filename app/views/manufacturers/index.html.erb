@@ -1,6 +1,7 @@
 <h1>Manufacturers</h1>
 <% @manufacturers.each do |man| %>
-	<%= man.name %>  <%=  link_to_admin_or_user(man) %>
+	<div class="menu"><%=  link_to_admin_or_user(man) %> </div>
+	Frames include:
 	<ul>
 		<% man.frames.each do |f| %>
 			<li><%= f.name %></li>

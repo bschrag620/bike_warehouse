@@ -1,0 +1,6 @@
+<% cart.each do |item| %>
+	<%= item.full_name %> <b>$<%= item.price %></b>
+	<ul>
+		<li><%= item.part_number %></li>
+	</ul>
+<% end %>

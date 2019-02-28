@@ -1,5 +1,6 @@
 <div class="login">
 <%= form_tag('/login') do %>
+	<%= hidden_field_tag "redirect_path", request.env['PATH_INFO'] %>
 	<table>
 		<tr>
 			<th align="left">Username</th>

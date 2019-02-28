@@ -1,0 +1,7 @@
+<h1>Shopping cart</h1>
+<%= render 'cart', cart: cart_lookup %>
+Total: <%= cart_total %>
+<%= button_to 'Checkout', checkout_path, :disabled => !logged_in?, :method => :get %> <%= button_to "Continue shopping", root_path, :method => :get %> 
+<% if !logged_in? %>
+	You must <%= link_to "log in", login_path %> to proceed with checkout
+<% end %>

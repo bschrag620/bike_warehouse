@@ -27,12 +27,22 @@ Rails.application.routes.draw do
 		get '/inventory/edit', to: 'base#edit', as: 'base_edit'
 	end
 
+	# user routes for signup, login, logout
 	resources :users, only: [:new, :create]
 	get '/users', to: 'session#signup'
-
-	root to: 'session#index', as: 'root'
 	get '/login', to: 'session#login', as: 'login'
 	post '/login', to: 'session#validate', as: 'validate_login'
 	post '/logout', to: 'session#logout', as: 'logout'
 	get '/signup', to: 'session#signup', as: 'signup'
+
+	# cart routes
+	get '/cart', to: 'session#shopping_cart', as: 'cart'
+	post '/cart', to: 'session#add_to_cart', as: 'add_to_cart'
+
+	# transaction routes
+	get '/checkout', to: 'transactions#checkout', as: 'checkout'
+
+	# home page
+	root to: 'session#index', as: 'root'
+	
 end

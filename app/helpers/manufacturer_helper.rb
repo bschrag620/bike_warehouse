@@ -19,9 +19,9 @@ module ManufacturerHelper
 
 	def link_to_admin_or_user(man)
 		if is_admin?
-			link_to("Edit", edit_admin_manufacturer_path(man))
+	    	link_to(man.name, edit_admin_manufacturer_path(man))
 		else
-			link_to("View #{man.name} page", manufacturer_path(man))
+			link_to(man.name, manufacturer_bikes_path(man))
 		end
 	end
 end
