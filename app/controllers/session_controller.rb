@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-	helper_method :add_to_cart, :cart, :cart_total, :cart_lookup
+	helper_method :add_to_cart, :cart, :cart_total, :cart_lookup, :cart_qty
 
 	def index
 
@@ -10,6 +10,9 @@ class SessionController < ApplicationController
 	end
 
 	def signup
+		if logged_in?
+			redirect_to root_path
+		end
 		@user = User.new
 	end
 
@@ -24,7 +27,7 @@ class SessionController < ApplicationController
 		if user && user.authenticate(params[:password])
 			session_login(user)
 			if is_admin?
-				redirect_to admin_root_path
+				redirect_to admin_path
 			else
 				clear_redirect
 			end
@@ -34,12 +37,16 @@ class SessionController < ApplicationController
 	end
 
 	def logout
-		logout
+		session_logout
 		clear_cart
 		redirect_to root_path
 	end
 
 	def clear_cart
+		cart.each do |item_id|
+			bike = Bike.find_by(:id => item_id)
+			bike.mark_available
+		end
 		session.delete(:cart)
 	end	
 
@@ -47,34 +54,25 @@ class SessionController < ApplicationController
 		session[:user_id] = user.id
 	end
 
-	def add_to_cart
-		cart << params[:product_id]
-		session[:cart] = cart
+	def session_logout
+		session.delete(:user_id)
+	end
 
-		sanitize_cart
+	def add_to_cart
+		binding.pry
+		params[:qty].to_i.times do |i|
+			bike =  Bike.find_by(:part_number => params[:part_number])
+			bike.mark_in_cart
+			cart << bike.id
+			binding.pry
+		end
+		
+		session[:cart] = cart
 
 		redirect_to cart_path
 	end
 
-	def cart_total
-		total = 0
-		cart_lookup.each do |item|
-			total += item.price
-		end
-		total
-	end
-
 	def shopping_cart
 
-	end
-
-	def cart_lookup
-		cart.collect do |item_id|
-			Bike.find(item_id)
-		end
-	end
-
-	def cart
-		session[:cart] ||= []
 	end
 end

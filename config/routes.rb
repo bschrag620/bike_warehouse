@@ -38,11 +38,15 @@ Rails.application.routes.draw do
 	# cart routes
 	get '/cart', to: 'session#shopping_cart', as: 'cart'
 	post '/cart', to: 'session#add_to_cart', as: 'add_to_cart'
+	delete '/cart', to: 'sessions#remove_item', as: 'remove_from_cart'
 
 	# transaction routes
 	get '/checkout', to: 'transactions#checkout', as: 'checkout'
 
 	# home page
 	root to: 'session#index', as: 'root'
+
+	# address routes
+	resources :addresses, only: [:new, :create]
 	
 end

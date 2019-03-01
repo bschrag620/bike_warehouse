@@ -1,0 +1,3 @@
+class PurchaseAddress < ApplicationController
+
+end

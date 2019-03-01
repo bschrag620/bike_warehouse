@@ -12,6 +12,7 @@ class CreateBikes < ActiveRecord::Migration[5.2]
       t.boolean :sold, :default => false
       t.integer :price
       t.string :color
+      t.integer :purchase_id
 
       t.timestamps
     end

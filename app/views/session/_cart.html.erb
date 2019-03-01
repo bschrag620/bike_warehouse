@@ -1,6 +1,7 @@
 <% cart.each do |item| %>
-	<%= item.full_name %> <b>$<%= item.price %></b>
+	<%= item.full_name %> <b>$<%= item.price %> <%= link_to "Remove", remove_from_cart_path(:id => item.id) %></b>
 	<ul>
-		<li><%= item.part_number %></li>
+		<li><%= item.part_number %> </li>
 	</ul>
 <% end %>
+Total: <%= total %>

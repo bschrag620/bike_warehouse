@@ -13,16 +13,19 @@
     <% if logged_in? %>
       <p>Welcome back to the Bike Warehouse, <%= current_user.username %> <%= logout_link %></p>
       <div class="nav">
-        
+        <%= link_to "Home", root_path %>
       </div>
     <% else %>
       <h1>Welcome to the Bike Warehouse</h1>
       <div class="nav">
-        <%= link_to "Sign up", signup_path %>
-        <%= render 'session/login' %>
+        <div class="block"><%= link_to_cart(cart_qty) %></div>
+        <div align="right">
+          <h3><%= link_to "Sign up", signup_path %>
+          <%= link_to "Log in", login_path %></h3>
+        </div>
       </div>
     <% end %>
-
+    <hr>
     <%= yield %>
   </body>
 </html>

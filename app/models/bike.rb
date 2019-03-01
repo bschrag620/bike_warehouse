@@ -1,5 +1,6 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
+	belongs_to :purchase
 
 
 	before_validation :set_serial
@@ -15,15 +16,22 @@ class Bike < ApplicationRecord
 	end
 
 	def self.unique_bikes
-		Bike.select("part_number").disctinct
+		bikes = Bike.select("part_number").distinct
+		bikes.collect do |bike|
+			Bike.find_by(:part_number => bike.part_number)
+		end
 	end
 
 	def exact_match
 		Bike.where("part_number = ?", self.part_number)
 	end
 
-	def count_of_match
-		exact_match.where("is_available = ?", true)
+	def qty_available
+		exact_match.where("is_available = ?", true).count
+	end
+
+	def qty_sold
+		exact_match.where("is_sold = ?", true).count
 	end
 
 	def return_by_part_number(pn)
@@ -34,18 +42,21 @@ class Bike < ApplicationRecord
 		self.in_cart = true
 		self.is_available = false
 		self.sold = false
+		self.save
 	end
 
 	def mark_as_sold
 		self.in_cart = false
 		self.is_available = false
 		self.sold = true
+		self.save
 	end
 
-	def mark_in_inventory
-		self.in_cart = true
-		self.is_available = false
+	def mark_available
+		self.in_cart = false
+		self.is_available = true
 		self.sold = false
+		self.save
 	end	
 	
 	#def self.order_by(category, direction = "asc")

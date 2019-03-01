@@ -37,3 +37,6 @@ Bike.create(:year => 2018, :size => 57, :frame_id => venge.id, :color => "white"
 Bike.create(:year => 2018, :size => 57, :frame_id => venge.id, :color => "white", :components => dura_ace, :price => "8000")
 Bike.create(:year => 2016, :size => 58, :frame_id => madone.id, :color => "blue", :components => ultegra, :price => "5000")
 Bike.create(:year => 2016, :size => 56, :frame_id => domane.id, :color => "blue", :components => ultegra, :price => "5000")
+
+admin = User.create(:username => 'admin', :email => 'brad.schrag@gmail.com', :password => BCrypt::Password.create('password'), :is_admin => true, :password_confirmation => 'password')
+brad = User.create(:username => 'brad', :email => 'brad.schrag@gmail.com', :password => BCrypt::Password.create('password'), :password_confirmation => 'password')

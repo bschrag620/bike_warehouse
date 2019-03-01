@@ -9,7 +9,8 @@ class BikesController < ApplicationController
 			@man = Manufacturer.find(params[:manufacturer_id])
 			@bikes = Bike.by_manufacturer(@man.name)
 		else
-			@bikes = Bike.all
+			@bikes = Bike.unique_bikes
+			
 		end
 	end
 end

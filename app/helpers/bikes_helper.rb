@@ -12,7 +12,7 @@ module BikesHelper
 		if is_admin?
 			link_to "Edit", edit_admin_bike_path(bike)
 		else
-			button_to("Add to cart", add_to_cart_path(:product_id => bike.id))
+			render 'session/add_to_cart_with_qty', qty: bike.qty_available, part_number: bike.part_number
 		end
 	end
 end

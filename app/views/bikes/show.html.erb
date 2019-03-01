@@ -5,8 +5,7 @@
 	<li>Color: <%= @bike.color %></li>
 	<li>Disciplines: <%= @bike.discipline_names %></li>
 	<li>Part number: <%= @bike.part_number %></li>
-	Qty available: <%= @bike.exact_match.count %>
+	Qty available: <%= @bike.qty_available %>
 </ul>
 <h3>$<%= @bike.price %></h3>
 <%= button_for_cart_or_edit(@bike) %>
-***Add to cart or edit depending on user permissions***

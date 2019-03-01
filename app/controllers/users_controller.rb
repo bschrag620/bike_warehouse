@@ -9,6 +9,7 @@ class UsersController < SessionController
 
 		if @user.save
 			session_login(@user)
+			redirect_to root_path
 		else
 			render 'session/signup'
 		end
