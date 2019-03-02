@@ -6,7 +6,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :email
       t.integer :phone_number
       t.boolean :is_admin
-      t.integer :address_id
+      t.integer :shipping_address_id
+      t.integer :billing_address_id
 
       t.timestamps
     end

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 	end
 
 	# user routes for signup, login, logout
-	resources :users, only: [:new, :create]
+	resources :users, only: [:new, :create, :update]
 	get '/users', to: 'session#signup'
 	get '/login', to: 'session#login', as: 'login'
 	post '/login', to: 'session#validate', as: 'validate_login'
@@ -38,10 +38,11 @@ Rails.application.routes.draw do
 	# cart routes
 	get '/cart', to: 'session#shopping_cart', as: 'cart'
 	post '/cart', to: 'session#add_to_cart', as: 'add_to_cart'
-	delete '/cart', to: 'sessions#remove_item', as: 'remove_from_cart'
+	delete '/cart', to: 'session#remove_item', as: 'remove_from_cart'
 
-	# transaction routes
-	get '/checkout', to: 'transactions#checkout', as: 'checkout'
+	# purchase routes
+	get '/checkout', to: 'purchases#new', as: 'checkout'
+	get '/payment', to: 'purchases#payment', as: 'payment'
 
 	# home page
 	root to: 'session#index', as: 'root'

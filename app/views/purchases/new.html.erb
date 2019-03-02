@@ -1,0 +1,16 @@
+<%= render 'session/cart', cart: cart_lookup, total: cart_total %>
+<%= form_for @user do |f| %>
+	<%= hidden_field_tag "redirect", payment_path %>
+	<h3>Shipping Address</h3>
+	<%= f.fields_for :shipping_address do |addr| %>
+		<%= addr.hidden_field :user_id, :value => @user.id %>
+		<%= render 'partials/address_form', addr: addr, f: f %>
+	<% end %>
+	<%= label_tag "billing_address[same_as_shipping]", "Use shipping address for billing address?" %>
+	<%= check_box_tag "billing_address[same_as_shipping]" %>
+	<h3>Billing Address</h3>
+	<%= f.fields_for :billing_address do |addr| %>
+		<%= render 'partials/address_form', addr: addr, f: f %>
+	<% end %>
+	<%= submit_tag "Proceed to Purchase" %>
+<% end %>

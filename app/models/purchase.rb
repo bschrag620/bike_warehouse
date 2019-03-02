@@ -1,6 +1,7 @@
 class Purchase < ApplicationRecord
-	has_many :purchase_addresses
-	has_many :addresses, through: :purchase_addresses
+	belongs_to :shipping_address
+	belongs_to :billing_address
+	belongs_to :user
 
 	has_many :bikes
 end

@@ -1,6 +1,6 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
-	belongs_to :purchase
+	belongs_to :purchase, optional: true
 
 
 	before_validation :set_serial
