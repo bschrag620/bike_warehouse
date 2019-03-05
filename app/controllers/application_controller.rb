@@ -63,4 +63,16 @@ class ApplicationController < ActionController::Base
 	def tax(value)
 		0.0975 * value
 	end
+
+	def validate_current_user(id)
+		if logged_in? 
+			if current_user.id.to_s != id
+				flash[:message] = "Unauthorized access."
+				redirect_to root_path
+			end
+		else
+			flash[:message] = "Requires login to access."
+			redirect_to login_path
+		end
+	end
 end

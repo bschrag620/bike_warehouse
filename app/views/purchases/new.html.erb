@@ -1,6 +1,5 @@
 <%= render 'session/cart', cart: cart_lookup, total: cart_total %>
 <hr>
-<%binding.pry%>
 <%= form_for([@purchase.user, @purchase]) do |f| %>
 	<%= f.hidden_field :user_id %>
 	<h3>Shipping Address</h3>

@@ -20,6 +20,11 @@
       <%= link_to "Edit inventory", admin_base_edit_path %>
       <%= link_to "View transaction history", admin_path %> 
     </div>
+    <% if !flash[:message].nil? %>
+      <div class="flash">
+        <%= flash[:message] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

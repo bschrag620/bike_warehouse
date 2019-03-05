@@ -16,11 +16,21 @@ class UsersController < SessionController
 	end
 
 	def update
+		validate_current_user(params[:user_id])
 		@user = current_user
 
 		if params.keys.include?("checkout_in_process")
 			PurchasesControler::create(params)
 		end
+	end
+
+	def show
+		validate_current_user(params[:id])
+
+	end
+
+	def edit
+		validate_current_user(params[:id])
 	end
 
 	private

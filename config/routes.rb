@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 	# cart routes
 	get '/cart', to: 'session#shopping_cart', as: 'cart'
 	post '/cart', to: 'session#add_to_cart', as: 'add_to_cart'
-	delete '/cart', to: 'session#remove_item', as: 'remove_from_cart'
+	delete '/cart/:id', to: 'session#remove_item', as: 'remove_from_cart'
 
 	# purchase routes
 	#sresources :purchases, only: [:new, :create, :edit, :update]

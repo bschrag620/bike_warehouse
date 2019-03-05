@@ -1,10 +1,19 @@
 class PurchasesController < ApplicationController
 	def new
+		validate_current_user(params[:user_id])
+		
+		if cart.count == 0
+			flash[:message] = "Your cart is empty."
+			redirect_to root_path
+		end
+
 		user = current_user
 		@purchase = user.purchases.build(:shipping_address => user.default_shipping, :billing_address => user.default_billing)
 	end
 
 	def create
+		validate_current_user(params[:user_id])
+
 		@purchase = Purchase.create(purchase_params)
 
 		if params[:billing_address][:same_as_shipping] == "1"
@@ -22,10 +31,12 @@ class PurchasesController < ApplicationController
 	end
 
 	def edit
+		validate_current_user(params[:user_id])
 		@purchase = Purchase.find(params[:id])
 	end
 
 	def update
+		validate_current_user(params[:user_id])
 		@purchase = Purchase.find(params[:id])
 
 		if params[:purchase][:cc_number].empty?
@@ -50,6 +61,7 @@ class PurchasesController < ApplicationController
 	end
 
 	def show
+		validate_current_user(params[:user_id])
 		@purchase = Purchase.find(params[:id])
 	end
 

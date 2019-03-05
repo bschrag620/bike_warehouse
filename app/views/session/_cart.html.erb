@@ -8,7 +8,7 @@
 		<tr>
 			<td><%= item.full_name %><br><%= item.part_number %></td>
 			<td>$<%= item.price %></td>
-			<td><%= link_to "Remove", remove_from_cart_path(:id => item.id) %></td>
+			<td><%= link_to "Remove", remove_from_cart_path(item.id), :method => 'delete' %></td>
 		</tr>
 	<% end %>
 	<tr>

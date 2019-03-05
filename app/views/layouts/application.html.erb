@@ -24,6 +24,11 @@
     </div>
     <div class="block"><%= link_to_cart(cart_qty) %></div>
     <hr>
+    <% if !flash[:message].nil? %>
+      <div class="flash">
+        <%= flash[:message] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
