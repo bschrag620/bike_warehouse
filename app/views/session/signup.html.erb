@@ -2,8 +2,8 @@
 <%= render_errors(@user) %>
 <%= form_for @user do |f| %>
 	<%= label_text(:username, f) %>
-	<%= label_password(:password, f) %>
-	<%= label_password(:password_confirmation, f) %>
+	<%= label_password(:password_digest, f) %>
+	<%= label_password(:password_digest_confirmation, f) %>
 	<%= label_text(:email, f) %>
 	<%= label_text(:phone_number, f) %>
 	<%= label_tag :is_admin, "Are you an admin?" %>

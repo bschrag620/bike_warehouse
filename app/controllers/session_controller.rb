@@ -1,6 +1,7 @@
 class SessionController < ApplicationController
 	helper_method :add_to_cart, :cart, :cart_total, :cart_lookup, :cart_qty
 
+
 	def index
 
 	end
@@ -23,8 +24,8 @@ class SessionController < ApplicationController
 			set_redirect(root_path)
 		end
 		user = User.find_by(:username => params[:username])
-
-		if user && user.authenticate(params[:password])
+		
+		if user && user.authenticate(params[:password_digest])
 			session_login(user)
 			if is_admin?
 				redirect_to admin_path
@@ -42,14 +43,6 @@ class SessionController < ApplicationController
 		redirect_to root_path
 	end
 
-	def clear_cart
-		cart.each do |item_id|
-			bike = Bike.find_by(:id => item_id)
-			bike.mark_available
-		end
-		session.delete(:cart)
-	end	
-
 	def session_login(user)
 		session[:user_id] = user.id
 	end
@@ -59,12 +52,10 @@ class SessionController < ApplicationController
 	end
 
 	def add_to_cart
-		binding.pry
 		params[:qty].to_i.times do |i|
 			bike =  Bike.find_by(:part_number => params[:part_number])
 			bike.mark_in_cart
 			cart << bike.id
-			binding.pry
 		end
 		
 		session[:cart] = cart

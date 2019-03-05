@@ -1,0 +1,36 @@
+<h1>Receipt</h1>
+Transaction number: <%= purchase.purchase_id %>
+<table border="1">
+	<tr>
+		<th>Item</th>
+		<th>Price</th>
+		<th>Serial number</th>
+	</tr>
+	<% purchase.bikes.each do |item| %>
+		<tr>
+			<td><%= item.full_name %><br><%= item.part_number %></td>
+			<td class="right">$<%= item.price %></td>
+			<td><%= item.serial %></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td>Discount:</td>
+		<td class="right">0</td>
+	</tr>
+	<tr>
+		<td>Subtotal:</td>
+		<td class="right">$<%= purchase.subtotal %></td>
+	</tr>
+	<tr>
+		<td>Tax:</td>
+		<td class="right">$<%= purchase.tax %></td>
+	</tr>
+	<tr>
+		<td><b>Total:</b></td>
+		<td class="right"><b>$<%= purchase.total %></b></td>
+	</tr>
+</table>
+<h4>Shipping Address</h4>
+	<%= render 'partials/address', address: purchase.shipping_address %>
+<h4>Billing Address</h4>
+	<%= render 'partials/address', address: purchase.billing_address %>

@@ -17,19 +17,15 @@ class UsersController < SessionController
 
 	def update
 		@user = current_user
-		binding.pry
-		if params.keys.include?(:redirect)
-			if params[:billing_address][:same_as_shipping]
-				params[:user][:billing_address] = params[:user][:shipping_address]
-			end
-			@shipping_address = ShippingAddress.find_or_create_by(shipping_address_params[:shipping_address])
-			@billing_address = BillingAddress.find_or_create_by(billing_address_params[:billing_address])
+
+		if params.keys.include?("checkout_in_process")
+			PurchasesControler::create(params)
 		end
 	end
 
 	private
 	def user_params
-		params.require(:user).permit(:username, :password, :password_confirmation, :email, :phone_number, :is_admin)
+		params.require(:user).permit(:username, :password_digest, :password_digest_confirmation, :email, :phone_number, :is_admin)
 	end
 
 	def shipping_address_params
@@ -40,7 +36,8 @@ class UsersController < SessionController
 				:street_address_2,
 				:city,
 				:state,
-				:zip])
+				:zip,
+				:default])
 	end
 
 	def billing_address_params
@@ -51,6 +48,7 @@ class UsersController < SessionController
 				:street_address_2,
 				:city,
 				:state,
-				:zip])
+				:zip,
+				:default])
 	end
 end

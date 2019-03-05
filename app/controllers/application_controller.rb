@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	include CustomRedirect
-	helper_method :current_user, :logged_in?, :is_admin?, :cart, :cart_lookup, :cart_qty, :cart, :cart_lookup, :cart_total
+	helper_method :current_user, :logged_in?, :is_admin?, :cart, :cart_lookup, :cart_qty, :cart, :cart_lookup, :cart_total, :tax
 
 	# helpers for user authentication
 	def current_user
@@ -48,5 +48,17 @@ class ApplicationController < ActionController::Base
 		cart.collect do |item_id|
 			Bike.find(item_id)
 		end
+	end
+
+	def clear_cart
+		cart.each do |item_id|
+			bike = Bike.find_by(:id => item_id)
+			bike.mark_available
+		end
+		session.delete(:cart)
+	end	
+
+	def tax(value)
+		0.0975 * value
 	end
 end

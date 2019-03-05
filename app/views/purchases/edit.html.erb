@@ -1,0 +1,7 @@
+<h1>Payment</h1>
+The only validations here are that fields cannot be empty. <br>
+There is no reason to enter any legitimate payment info.
+<%= form_for @purchase do |f| %>
+	<%= label_text :cc_number, f %>
+	<%= submit_tag "Pay now" %>
+<% end %>

@@ -45,10 +45,11 @@ class Bike < ApplicationRecord
 		self.save
 	end
 
-	def mark_as_sold
+	def mark_as_sold(purchase_id)
 		self.in_cart = false
 		self.is_available = false
 		self.sold = true
+		self.purchase_id = purchase_id
 		self.save
 	end
 

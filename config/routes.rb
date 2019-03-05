@@ -41,8 +41,8 @@ Rails.application.routes.draw do
 	delete '/cart', to: 'session#remove_item', as: 'remove_from_cart'
 
 	# purchase routes
-	get '/checkout', to: 'purchases#new', as: 'checkout'
-	get '/payment', to: 'purchases#payment', as: 'payment'
+	resources :purchases, only: [:new, :create, :edit, :update]
+	get '/receipt/:id', to: 'purchases#receipt', as: 'receipt'
 
 	# home page
 	root to: 'session#index', as: 'root'
