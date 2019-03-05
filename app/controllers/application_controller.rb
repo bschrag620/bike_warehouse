@@ -53,7 +53,9 @@ class ApplicationController < ActionController::Base
 	def clear_cart
 		cart.each do |item_id|
 			bike = Bike.find_by(:id => item_id)
-			bike.mark_available
+			if bike.in_cart
+				bike.mark_available
+			end
 		end
 		session.delete(:cart)
 	end	

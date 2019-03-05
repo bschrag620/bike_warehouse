@@ -15,7 +15,7 @@ class PurchasesController < ApplicationController
 		@purchase.billing_address = BillingAddress.find_or_create_and_check_default(billing_address_params)
 
 		if @purchase.save
-			redirect_to edit_purchase_path(@purchase)
+			redirect_to user_payment_path(@purchase.user, @purchase)
 		else
 			render 'purchases/new'
 		end
@@ -43,15 +43,14 @@ class PurchasesController < ApplicationController
 
 			@purchase.mark_as_complete(cart_total, tax(cart_total))
 			clear_cart
-			redirect_to receipt_path(@purchase)
+			redirect_to user_receipt_path(@purchase.user, @purchase)
 		else
 			render :edit
 		end
 	end
 
-	def receipt
+	def show
 		@purchase = Purchase.find(params[:id])
-
 	end
 
 	private

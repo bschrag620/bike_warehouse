@@ -14,7 +14,6 @@ class Purchase < ApplicationRecord
 	def mark_as_complete(subtotal, tax)
 		self.in_process = false
 		self.completed = true
-		binding.pry
 		self.subtotal = subtotal
 		self.tax = tax
 		self.total = self.subtotal + self.tax
