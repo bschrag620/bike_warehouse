@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 	validates :username, presence: true, uniqueness: true
-	validates :password_digest, confirmation: true
-	validates :password_digest_confirmation, presence: true, on: :create
+	validates :password_digest, confirmation: true, :if => :not_uid
+	validates :password_digest_confirmation, presence: true, on: :create, :if => :not_uid
 	validates :email, presence: true
 
 	has_many :purchases
@@ -50,5 +50,10 @@ class User < ApplicationRecord
 
 	def set_all_billing_to_false
 		self.set_all_addresses_to_false_default("billing")
+	end
+
+	private
+	def not_uid
+		!self.facebook_uid
 	end
 end

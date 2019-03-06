@@ -1,6 +1,20 @@
 class SessionController < ApplicationController
 	helper_method :add_to_cart, :cart, :cart_total, :cart_lookup, :cart_qty
 
+	def create
+		@user = User.find_or_create_by(:facebook_uid => auth['uid'])
+
+		if !@user.valid?
+			@user.username = auth[:info][:name]
+			@user.email = auth[:info][:email]
+			@user.password_digest = BCrypt::Password.create(auth[:credentials][:token])
+			@user.password_digest_confirmation = BCrypt::Password.create(auth[:credentials][:token])
+			@user.save
+		end
+		session_login(@user)
+
+		redirect_to root_path
+	end
 
 	def index
 
@@ -30,7 +44,7 @@ class SessionController < ApplicationController
 			if is_admin?
 				redirect_to admin_path
 			else
-				clear_redirect
+				redirect_to clear_redirect
 			end
 		else
 			redirect_to login_path
@@ -70,5 +84,10 @@ class SessionController < ApplicationController
 	def remove_item
 		cart.delete(params[:id])
 		redirect_to cart_path
+	end
+
+	private
+	def auth
+		request.env['omniauth.auth']
 	end
 end

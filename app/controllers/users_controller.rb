@@ -26,11 +26,12 @@ class UsersController < SessionController
 
 	def show
 		validate_current_user(params[:id])
-
+		@user = current_user
 	end
 
 	def edit
 		validate_current_user(params[:id])
+		@user = current_user
 	end
 
 	private

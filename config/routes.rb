@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 	end
 
 	# user routes for signup, login, logout
-	resources :users, only: [:new, :create, :update] do
+	resources :users, only: [:new, :create, :update, :show] do
 		get '/checkout', to: 'purchases#new', as: 'checkout'
 		post '/checkout', to: 'purchases#create', as: 'purchases'
 		get '/checkout/:id/payment', to: 'purchases#edit', as: 'payment'
@@ -66,5 +66,8 @@ Rails.application.routes.draw do
 
 	# address routes
 	resources :addresses, only: [:new, :create]
+
+	#omniauth routes
+	get '/auth/facebook/callback', to: 'session#create'
 	
 end
