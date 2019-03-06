@@ -1,14 +1,16 @@
-<h1>All Bikes</h1>
+<h1>Bikes</h1>
 <table>
 	<tr>
 		<th><%= "Manufacturer" %></th>
 		<th><%= "Frame" %></th>
 		<th><%= "Size" %></th>
 		<th><%= "Components" %></th>
+		<th><%= "Disciplines" %></th>
 		<th><%= "Price" %></th>
 		<% if is_admin? %>
 			<th>Part number</th>
 			<th>Serial number</th>
+			<th>Status</th>
 			<th></th>
 		<% end %>
 		<th></th>
@@ -19,10 +21,12 @@
 		<td><%= bike.frame_name %></td>
 		<td><%= bike.size %></td>
 		<td><%= bike.components %></td>
+		<td><%= bike.discipline_names %></td>
 		<td><%= bike.price %></td>
 		<% if is_admin? %>
 			<td><%= bike.part_number %></td>
 			<td><%= bike.serial %></td>
+			<td><%= status(bike) %></td>
 			<td><%= link_to "Edit", edit_admin_bike_path(bike) %></td>
 
 		<% end %>

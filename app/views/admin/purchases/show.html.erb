@@ -1,0 +1,3 @@
+<h1>Transaction #<%= @purchase.purchase_id %></h1>
+<%= render 'purchases/receipt', purchase: @purchase %>
+<%= link_to "Delete", admin_purchase_path(@purchase), :method => 'delete' %>

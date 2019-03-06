@@ -1,0 +1,19 @@
+<h1>Frames</h1>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Manufacturer</th>
+		<th>Disciplines</th>
+		<th></th>
+	</tr>
+	<% @frames.each do |frame| %>
+		<tr>
+			<td><%= frame.name %></td>
+			<td><%= frame.manufacturer_name %></td>
+			<td><%= frame.discipline_names %></td>
+			<% if is_admin? %>
+				<td><%= link_to "Edit", edit_admin_frame_path(frame) %></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>

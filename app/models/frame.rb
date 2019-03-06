@@ -25,4 +25,8 @@ class Frame < ApplicationRecord
 	def total_count
 		Bike.all.where("frame_id = ?", self.id).count
 	end
+
+	def discipline_names
+		self.disciplines.pluck(:name).join(', ')
+	end
 end

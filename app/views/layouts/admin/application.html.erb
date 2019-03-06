@@ -18,7 +18,8 @@
       <%= link_to "Admin Home", admin_path %>
       <%= link_to "View inventory", admin_base_path %>
       <%= link_to "Edit inventory", admin_base_edit_path %>
-      <%= link_to "View transaction history", admin_path %> 
+      <%= link_to "View transaction history", admin_purchases_path %>
+      <%= link_to "Users", admin_users_path %>
     </div>
     <% if !flash[:message].nil? %>
       <div class="flash">

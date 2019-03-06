@@ -59,21 +59,13 @@ class Bike < ApplicationRecord
 		self.sold = false
 		self.save
 	end	
-	
-	#def self.order_by(category, direction = "asc")
-	#	full_name = 'order_by_' + category
-	#	method(full_name.to_sym).call(direction)
-	#end
-
-	def self.by_discipline(discipline_name)
-		discipline = Discipline.find_by(:name => discipline_name)
-		if discipline
-			joins(frame: :frame_disciplines).where("discipline_id = ?", discipline.id)
-		end
-	end
 
 	def self.frame_match(frame_name)
-		Bike.joins(:frame).where("frames.name = ?", frame_name)
+		joins(:frame).where("frames.name = ?", frame_name)
+	end
+
+	def self.discipline_match(disc_name)
+		 joins(frame: :disciplines).where("disciplines.name = ?", disc_name)
 	end
 
 	def self.manufacturer_match(man_name)
@@ -81,7 +73,7 @@ class Bike < ApplicationRecord
 	end
 
 	def self.order_by_manufacturer(direction)
-		Bike.joins(frame: :manufacturer).order("manufacturers.name #{direction}")
+		joins(frame: :manufacturer).order("manufacturers.name #{direction}")
 	end
 
 	def self.order_by_frame(direction)
@@ -121,8 +113,18 @@ class Bike < ApplicationRecord
 	end
 
 	def discipline_names
-		self.frame.disciplines.pluck(:name).join(', ')
+		self.frame.discipline_names
 	end	
+
+	def status
+		if self.is_available
+			"Available"
+		elsif self.in_cart
+			"In cart"
+		else
+			"Sold"
+		end
+	end
 
 	private
 	def set_serial

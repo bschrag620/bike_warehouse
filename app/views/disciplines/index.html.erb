@@ -1,0 +1,5 @@
+<h1>Disciplines</h1>
+<% @disciplines.each do |disc| %>
+	<%= link_to disc.name, discipline_bikes_path(disc) %> <br>
+<% end %>
+

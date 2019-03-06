@@ -15,4 +15,12 @@ module BikesHelper
 			render 'session/add_to_cart_with_qty', qty: bike.qty_available, part_number: bike.part_number
 		end
 	end
+
+	def status(bike)
+		if bike.status == "Sold"
+			link_to "Sold", (admin_purchase_path(bike.purchase.id))
+		else
+			bike.status
+		end
+	end
 end

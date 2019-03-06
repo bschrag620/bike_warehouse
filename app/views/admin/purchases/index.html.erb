@@ -1,0 +1,17 @@
+<h1>Transactions</h1>
+<table>
+	<tr>
+		<th>Purhcase ID</th>
+		<th>Amount</th>
+		<th>User</th>
+		<th></th>
+	</tr>
+	<% @purchases.each do |purch| %>
+		<tr>
+			<td><%= purch.purchase_id %></td>
+			<td><%= purch.total %></td>
+			<td><%= purch.user.username %></td>
+			<td><%= link_to "View", admin_purchase_path(purch) %></td>
+		</tr>
+	<% end %>
+</table>

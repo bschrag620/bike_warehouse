@@ -23,9 +23,17 @@ class Admin::BikesController < Admin::BaseController
 	end
 
 	def index
-		@bikes = Bike.all
+		if !params[:manufacturer_id].nil?
+			@man = Manufacturer.find(params[:manufacturer_id])
+			@bikes = Bike.manufacturer_match(@man.name)
+		elsif !params[:discipline_id].nil?
+			@discipline = Discipline.find(params[:discipline_id])
+			@bikes = Bike.discipline_match(@discipline.name)
+		else
+			@bikes = Bike.all
+		end
 
-		render '/bikes/index'
+		render 'bikes/index'
 	end
 
 

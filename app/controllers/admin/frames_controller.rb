@@ -25,7 +25,9 @@ class Admin::FramesController < Admin::BaseController
 	end
 
 	def edit
-		if !params[:redirect].empty?
+		session.delete(:redirect)
+
+		if !params[:redirect].nil?
 			set_redirect(params[:redirect])
 			params.delete(:redirect)
 		end
@@ -39,10 +41,9 @@ class Admin::FramesController < Admin::BaseController
 
 		if @frame.save
 			if redirect?
-					binding.pry
-					clear_redirect
+					redirect_to clear_redirect
 				else
-					redirect_to manufacturers_path
+					redirect_to admin_frames_path
 			end
 		else
 			render :edit
@@ -52,6 +53,8 @@ class Admin::FramesController < Admin::BaseController
 
 	def index
 		@frames = Frame.all
+
+		render '/frames/index'
 	end
 
 	def create
