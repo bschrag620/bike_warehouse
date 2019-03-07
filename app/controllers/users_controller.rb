@@ -1,4 +1,5 @@
 class UsersController < SessionController
+	
 	def new
 		@user = User.new
 		render 'session/signup'
@@ -7,21 +8,25 @@ class UsersController < SessionController
 	def create
 		@user = User.new(user_params)
 
-		if @user.save
-			session_login(@user)
-			redirect_to root_path
-		else
+		if !@user.save
 			render 'session/signup'
 		end
+
+		session_login(@user)
+		redirect_to root_path
 	end
 
 	def update
 		validate_current_user(params[:user_id])
 		@user = current_user
 
-		if params.keys.include?("checkout_in_process")
-			PurchasesControler::create(params)
+		@user.update(user_params)
+		if @user.save
+			flash[:message] = "Profile successfully update."
+		else
+			flash[:message] = "Profile could not be updated."
 		end
+
 	end
 
 	def show

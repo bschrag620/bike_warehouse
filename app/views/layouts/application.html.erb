@@ -13,7 +13,7 @@
     <div class="nav">
       <% if logged_in? %>
         <p>Welcome back to the Bike Warehouse, <%= current_user.username %> <%= logout_link %></p>
-          <%= link_to "Home", root_path %>
+          <%= link_to "Home", root_path %> <%= link_to "Profile", user_path(current_user) %>
       <% else %>
         <h1>Welcome to the Bike Warehouse</h1>
         <div align="right">

@@ -1,0 +1,9 @@
+<div class="address block">
+	<b>Address line 1: </b><%= address.street_address_1 %> <br>
+	<% if !address.street_address_2.nil? %>
+		<b>Address line 2: </b><%= address.street_address_2 %> <br>
+	<% end %>
+	<b>City: </b><%= address.city %> <br>
+	<b>State: </b><%= address.state %> <b>Zip: </b><%= address.zip %> <br>
+	<%= hidden_field_tag "address_type", address.class.name %>
+</div>

@@ -1,0 +1,11 @@
+<%= render_errors address %>
+<%= form_for [address.user, address] do |f| %>
+	<%= render 'addresses/address_form', addr: f %>
+	<%= render 'addresses/address_default_form', addr: f %>
+	<%= submit_tag "Update address" %>
+<% end %>
+<% if address.class.name == "ShippingAddress" %>
+	<%= button_to 'Delete address', user_shipping_address_path(address.user, address), :method => 'delete' %>
+<% else %>
+	<%= button_to 'Delete address', user_billing_address_path(address.user, address), :method => 'delete' %>
+<% end %>

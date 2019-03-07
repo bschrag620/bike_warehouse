@@ -1,0 +1,8 @@
+<% addresses.each do |addr| %>
+	<p><%= render 'addresses/address' ,address: addr%>
+		<% if addr.default %>
+			<br> <b>Default</b> <br>
+		<% end %>
+		<%= shipping_edit_button(addr) %>
+	</p> <hr>
+<% end %>
