@@ -1,0 +1,8 @@
+<%= form_for review do |f| %>
+	<%= hidden_field_tag :user_id, 	current_user.id %>
+	<%= f.hidden_field :bike_id %>
+	<%= f.label :rating %>
+	<%= select_tag 'review[rating]', options_for_select((1..10).map {|i| i}) %>
+	<%= label_text :comment, f %>
+	<%= submit_tag "Leave review" %>
+<% end %>

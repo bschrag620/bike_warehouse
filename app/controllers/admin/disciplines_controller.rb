@@ -4,7 +4,6 @@ class Admin::DisciplinesController < Admin::BaseController
 	end
 
 	def edit
-		binding.pry
 		@discipline = Discipline.find(params[:id])
 	end
 

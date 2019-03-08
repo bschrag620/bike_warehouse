@@ -7,6 +7,7 @@ class User < ApplicationRecord
 	has_many :purchases
 	has_many :shipping_addresses
 	has_many :billing_addresses
+	has_many :reviews
 
 	accepts_nested_attributes_for :shipping_addresses
 	accepts_nested_attributes_for :billing_addresses

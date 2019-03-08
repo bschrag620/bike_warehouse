@@ -9,3 +9,6 @@
 </ul>
 <h3>$<%= @bike.price %></h3>
 <%= button_for_cart_or_edit(@bike) %>
+<hr>
+<%= render_review_form(@review) %>
+<%= render_reviews(@bike) %>

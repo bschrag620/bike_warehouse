@@ -25,4 +25,20 @@ module BikesHelper
 			bike.status
 		end
 	end
+
+	def render_reviews(bike)
+		if bike.reviews.count > 0
+			render 'partials/reviews', reviews: bike.reviews[0..-2]
+		else
+			"No reviews. Be the first to leave a review!"
+		end
+	end
+
+	def render_review_form(review)
+		if logged_in?
+			render 'partials/review_form', review: review
+		else
+			render 'partials/login_to_review'
+		end
+	end
 end

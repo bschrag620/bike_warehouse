@@ -73,5 +73,7 @@ Rails.application.routes.draw do
 
 	#omniauth routes
 	get '/auth/facebook/callback', to: 'session#create'
+
+	resources :reviews, only: [:create]
 	
 end

@@ -2,6 +2,7 @@ class BikesController < ApplicationController
 
 	def show
 		@bike = Bike.find(params[:id])
+		@review = @bike.reviews.build
 	end
 
 	def index

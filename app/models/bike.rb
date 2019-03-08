@@ -1,7 +1,7 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
 	belongs_to :purchase, optional: true
-
+	has_many :reviews
 
 	before_validation :set_serial
 	after_validation :set_part_number
@@ -126,6 +126,15 @@ class Bike < ApplicationRecord
 			"In cart"
 		else
 			"Sold"
+		end
+	end
+
+	def rating
+		ratings = self.reviews.pluck(:rating)
+		if ratings.size == 0
+			0
+		else
+			ratings.sum.to_f / ratings.size || 0
 		end
 	end
 
