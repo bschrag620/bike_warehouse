@@ -1,4 +1,11 @@
 class PurchasesController < ApplicationController
+	def index
+		validate_current_user(params[:user_id])
+
+		@user = current_user
+		@purchases = @user.purchases
+	end
+
 	def new
 		validate_current_user(params[:user_id])
 		

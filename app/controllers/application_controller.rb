@@ -66,6 +66,7 @@ class ApplicationController < ActionController::Base
 
 	def validate_current_user(id)
 		if logged_in? 
+
 			if current_user.id.to_s != id
 				flash[:message] = "Unauthorized access."
 				redirect_to root_path
@@ -74,5 +75,7 @@ class ApplicationController < ActionController::Base
 			flash[:message] = "Requires login to access."
 			redirect_to login_path
 		end
+
+		return
 	end
 end

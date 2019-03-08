@@ -17,16 +17,17 @@ class UsersController < SessionController
 	end
 
 	def update
-		validate_current_user(params[:user_id])
+		validate_current_user(params[:user_id] || params[:id])
 		@user = current_user
 
 		@user.update(user_params)
 		if @user.save
-			flash[:message] = "Profile successfully update."
+			flash[:message] = "Profile successfully updated."
+			redirect_to user_path(@user)
 		else
 			flash[:message] = "Profile could not be updated."
+			render :edit
 		end
-
 	end
 
 	def show

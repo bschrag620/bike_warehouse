@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reviews/create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 	resources :bikes, :manufacturers, :frame, only: [:show, :index]
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
 
 	resources :manufacturers do
 		resources :bikes, only: [:index]
+		get 'bikes/sort/:category/:direction', to: 'bikes#index', as: 'bikes_sort'
 	end
 
 	namespace :admin do
@@ -21,16 +23,14 @@ Rails.application.routes.draw do
 		
 		resources :purchases, only: [:index, :show, :destroy]
 		
-		resources :frames do
-			resources :bikes, only: [:index]
-		end
-		
 		resources :disciplines do
 			resources :bikes, only: [:index]
 		end
 
+		resources :frames, only: [:index, :show, :edit, :update, :create, :new]
+
 		resources :users do
-			get '/purchases', to: 'purchases#index', as: 'purchases'
+			resources :purchases, only: [:index, :show]
 		end
 		
 		get '', to: 'base#index'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 	end
 
 	# user routes for signup, login, logout
-	resources :users, only: [:new, :create, :update, :show] do
+	resources :users, only: [:new, :create, :update, :show, :edit] do
 		get '/checkout', to: 'purchases#new', as: 'checkout'
 		post '/checkout', to: 'purchases#create', as: 'purchases'
 		get '/checkout/:id/payment', to: 'purchases#edit', as: 'payment'
@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
 		resources :shipping_addresses, only: [:edit, :update, :destroy]
 		resources :billing_addresses, only: [:edit, :update, :destroy]
+		resources :purchases, only: [:index]
 	end
 	get '/users', to: 'session#signup'
 	get '/login', to: 'session#login', as: 'login'

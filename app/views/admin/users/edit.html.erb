@@ -1,0 +1,6 @@
+<h1>Edit User</h1>
+<%= render_errors(@user) %>
+<%= form_for [:admin, @user] do |f| %>
+	<%= render 'users/form', f: f %>
+	<%= submit_tag "Update user" %>
+<% end %>

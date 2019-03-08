@@ -1,0 +1,20 @@
+<table>
+	<tr>
+		<th>Purhcase ID</th>
+		<th>Amount</th>
+		<% if is_admin? %>
+			<th>User</th>
+		<% end %>
+		<th></th>
+	</tr>
+	<% purchases.each do |purch| %>
+		<tr>
+			<td><%= purch.purchase_id %></td>
+			<td><%= purch.total %></td>
+			<% if is_admin? %>
+				<td><%= purch.user.username %></td>
+			<% end %>
+			<td><%= link_to "View", admin_purchase_path(purch) %></td>
+		</tr>
+	<% end %>
+</table>

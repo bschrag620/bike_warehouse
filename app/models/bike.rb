@@ -11,15 +11,12 @@ class Bike < ApplicationRecord
 	validates :price, :size, :year, numericality: {integer_only: true}
 
 
-	def self.all_(category)
-		Bike.all.pluck(category).uniq
+	def self.unique_bikes
+		Bike.group("part_number")
 	end
 
-	def self.unique_bikes
-		bikes = Bike.select("part_number").distinct
-		bikes.collect do |bike|
-			Bike.find_by(:part_number => bike.part_number)
-		end
+	def self.find_available(pn)
+		where("part_number = ? AND is_available = ?", pn, true).first
 	end
 
 	def exact_match
@@ -32,10 +29,6 @@ class Bike < ApplicationRecord
 
 	def qty_sold
 		exact_match.where("is_sold = ?", true).count
-	end
-
-	def return_by_part_number(pn)
-		Bike.find_by(:part_number => pn)
 	end
 
 	def mark_in_cart
@@ -94,6 +87,16 @@ class Bike < ApplicationRecord
 
 	def self.order_by_color(direction)
 		order("color #{direction}")	
+	end
+
+	def self.order_by_quantity(direction)
+		select("*, count(*) as total_count").group("part_number").order("total_count #{direction}")
+	end
+
+	def self.ordered_by(category, direction="asc")
+		category_symbol = "order_by_#{category}".to_sym
+		category_method = Bike.method(category_symbol)
+		category_method.call(direction)
 	end
 
 	def full_name

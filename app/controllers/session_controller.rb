@@ -67,7 +67,7 @@ class SessionController < ApplicationController
 
 	def add_to_cart
 		params[:qty].to_i.times do |i|
-			bike =  Bike.find_by(:part_number => params[:part_number])
+			bike =  Bike.find_available(params[:part_number])
 			bike.mark_in_cart
 			cart << bike.id.to_s
 		end
@@ -82,7 +82,8 @@ class SessionController < ApplicationController
 	end
 
 	def remove_item
-		cart.delete(params[:id])
+		bike = Bike.find(cart.delete(params[:id]))
+		bike.mark_available
 		redirect_to cart_path
 	end
 

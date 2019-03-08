@@ -5,8 +5,8 @@
 	<h3>Shipping Address</h3>
 	<%= render_errors(@purchase.shipping_address) %>
 	<%= f.fields_for @purchase.shipping_address do |addr| %>
-		<%= render 'partials/address_form', addr: addr, f: f %>
-		<%= render 'partials/address_default_form', addr: addr %>
+		<%= render 'addresses/address_form', addr: addr, f: f %>
+		<%= render 'addresses/address_default_form', addr: addr %>
 	<% end %>
 	<%= hidden_field_tag "billing_address[same_as_shipping]", 0 %>
 	<%= label_tag "billing_address[same_as_shipping]", "Use shipping address for billing address?" %>
@@ -14,8 +14,8 @@
 	<h3>Billing Address</h3>
 	<%= render_errors(@purchase.shipping_address) %>
 	<%= f.fields_for @purchase.billing_address do |addr| %>
-		<%= render 'partials/address_form', addr: addr, f: f %>
-		<%= render 'partials/address_default_form', addr: addr %>
+		<%= render 'addresses/address_form', addr: addr, f: f %>
+		<%= render 'addresses/address_default_form', addr: addr %>
 	<% end %>
 	<%= submit_tag "Proceed to Purchase" %>
 <% end %>

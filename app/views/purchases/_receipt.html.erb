@@ -31,6 +31,6 @@ Transaction number: <%= purchase.purchase_id %>
 	</tr>
 </table>
 <h4>Shipping Address</h4>
-	<%= render 'partials/address', address: purchase.shipping_address %>
+	<%= render 'addresses/address', address: purchase.shipping_address %>
 <h4>Billing Address</h4>
-	<%= render 'partials/address', address: purchase.billing_address %>
+	<%= render 'addresses/address', address: purchase.billing_address %>

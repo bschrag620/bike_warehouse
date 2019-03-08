@@ -1,0 +1,4 @@
+<h1>Disciplines</h1>
+<% @disciplines.each do |disc| %>
+	<%= link_to disc.name, edit_admin_discipline_path(disc) %> <br>
+<% end %>

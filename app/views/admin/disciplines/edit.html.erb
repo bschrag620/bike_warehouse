@@ -1,0 +1,6 @@
+<h1>Edit Discipline</h1>
+<%= render_errors(@discipline) %>
+<%= form_for [:admin, @discipline] do |f| %>
+	<%= label_text(:name, f) %>
+	<%= submit_tag "Update discipline" %>
+<% end %>
