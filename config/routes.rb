@@ -5,11 +5,7 @@ Rails.application.routes.draw do
 	resources :bikes, :manufacturers, :frame, only: [:show, :index]
 	get '/bikes/sort/:category/:direction', to: 'bikes#index', as: 'bikes_sort'
 
-	resources :disciplines do
-		resources :bikes, only: [:index]
-	end
-
-	resources :manufacturers do
+	resources :manufacturers, :disciplines do
 		resources :bikes, only: [:index]
 		get 'bikes/sort/:category/:direction', to: 'bikes#index', as: 'bikes_sort'
 	end
