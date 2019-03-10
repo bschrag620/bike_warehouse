@@ -1,7 +1,9 @@
 <%= render_errors(review) %>
 <%= form_for review do |f| %>
 	<%= hidden_field_tag :user_id, 	current_user.id %>
-	<%= f.hidden_field :bike_id %>
+	<%= hidden_field_tag :bike_id, params[:id] %>
+	<%= f.hidden_field :frame_id %>
+	<%= hidden_field_tag :redirect %>
 	<%= f.label :rating %>
 	<%= select_tag 'review[rating]', options_for_select((1..10).map {|i| i}) %>
 	<%= label_text :comment, f %>

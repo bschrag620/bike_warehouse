@@ -2,7 +2,7 @@ class Discipline < ApplicationRecord
 	has_many :frame_disciplines
 	has_many :frames, through: :frame_disciplines
 
-	validates :name, :uniqueness => true
+	validates :name, :uniqueness => true, :presence => true
 	
 
 	def self.mass_create(names)

@@ -27,5 +27,9 @@ module ApplicationHelper
 		end
 	end
 
+	def delete_button(path)
+		render 'partials/delete_button', path: path
+	end
+
 
 end

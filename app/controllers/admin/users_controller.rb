@@ -9,7 +9,6 @@ class Admin::UsersController < Admin::BaseController
 
 	def update
 		@user = User.find(params[:id])
-		binding.pry
 		@user.update(user_params)
 
 		if @user.save

@@ -1,5 +1,8 @@
 <h1>New Manufacturer</h1>
 <%= form_for [:admin, @man] do |f| %>
 	<%= render 'form', man: @man, f: f %>
+	<%= label_tag "frame_names", "Enter frames to be associated with this manufacturer" %> <br>
+	<%= text_field_tag "frame_names" %> <br>
+	<div class="hint">* seperate multiple frames with a ','</div> <br>
 	<%= submit_tag "Add Manufacturer" %>
 <% end %>

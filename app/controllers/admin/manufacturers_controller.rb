@@ -23,6 +23,12 @@ class Admin::ManufacturersController < Admin::BaseController
 
 	def create
 		@man = Manufacturer.new(manufacturer_params)
+
+		frame_name_params.split(',').each do |name|
+			new_frame = @man.frames.build(:name => name.strip)
+			new_frame.save
+		end
+
 		if @man.save
 			if redirect?
 				redirect_to clear_redirect
@@ -57,4 +63,9 @@ class Admin::ManufacturersController < Admin::BaseController
 	def manufacturer_params
 		params.require(:manufacturer).permit(:name, frame_ids:[])	
 	end
+
+	def frame_name_params
+		params.require(:frame_names)
+	end
+
 end

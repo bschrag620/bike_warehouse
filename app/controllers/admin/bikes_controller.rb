@@ -18,7 +18,6 @@ class Admin::BikesController < Admin::BaseController
 
 	def show
 		@bike = Bike.find(params[:id])
-
 		render 'bikes/show'
 	end
 

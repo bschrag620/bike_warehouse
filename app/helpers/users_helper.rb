@@ -6,9 +6,9 @@ module UsersHelper
 
 	def shipping_edit_button(address)
 		if is_shipping?(address)
-			button_to("Edit", edit_user_shipping_address_path(address.user, address))
+			button_to("Edit", edit_user_shipping_address_path(address.user, address), :method => 'get')
 		else
-			button_to("Edit", edit_user_billing_address_path(address.user, address))
+			button_to("Edit", edit_user_billing_address_path(address.user, address), :method => 'get')
 		end
 	end
 end

@@ -1,7 +1,7 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
 	belongs_to :purchase, optional: true
-	has_many :reviews
+	has_many :reviews, through: :frames
 
 	before_validation :set_serial
 	after_validation :set_part_number
@@ -10,6 +10,9 @@ class Bike < ApplicationRecord
 	validates :serial, :frame_id, :size, :components, :price, :color, :year, presence: :true
 	validates :price, :size, :year, numericality: {integer_only: true}
 
+	def self.all_(category)
+		Bike.all.pluck(category).uniq
+	end
 
 	def self.unique_bikes
 		Bike.group("part_number")
@@ -89,8 +92,12 @@ class Bike < ApplicationRecord
 		order("color #{direction}")	
 	end
 
+	def self.order_by_rating(direction)
+		left_joins(frame: :reviews).group("part_number").select("bikes.*, avg(reviews.rating) as rating").order("rating #{direction}")
+	end
+
 	def self.order_by_quantity(direction)
-		select("*, count(*) as total_count").group("part_number").order("total_count #{direction}")
+		select("*, sum(is_available) as total_count").group("part_number").order("total_count #{direction}")
 	end
 
 	def self.ordered_by(category, direction="asc")
@@ -130,12 +137,7 @@ class Bike < ApplicationRecord
 	end
 
 	def rating
-		ratings = self.reviews.pluck(:rating)
-		if ratings.size == 0
-			0
-		else
-			ratings.sum.to_f / ratings.size || 0
-		end
+		self.frame.rating
 	end
 
 	private

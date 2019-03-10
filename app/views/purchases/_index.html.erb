@@ -13,8 +13,11 @@
 			<td><%= purch.total %></td>
 			<% if is_admin? %>
 				<td><%= purch.user.username %></td>
+				<td><%= link_to "View", admin_purchase_path(purch) %></td>
+			<% else %>
+				<td><%= link_to "View", user_receipt_path(purch.user.id, purch.id) %></td>
 			<% end %>
-			<td><%= link_to "View", admin_purchase_path(purch) %></td>
+			
 		</tr>
 	<% end %>
 </table>

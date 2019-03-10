@@ -27,17 +27,17 @@ module BikesHelper
 	end
 
 	def render_reviews(bike)
-		if bike.reviews.count > 0
-			render 'partials/reviews', reviews: bike.reviews[0..-2]
+		if bike.frame.reviews.count > 0
+			render 'partials/reviews', reviews: bike.frame.reviews[0..-2]
 		else
 			"No reviews. Be the first to leave a review!"
 		end
 	end
 
 	def render_review_form(review)
-		if logged_in?
+		if logged_in? && !is_admin?
 			render 'partials/review_form', review: review
-		else
+		elsif !is_admin?
 			render 'partials/login_to_review'
 		end
 	end

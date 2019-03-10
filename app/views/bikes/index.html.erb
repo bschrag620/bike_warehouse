@@ -7,6 +7,7 @@
 		<th><%= sort_by_link("components", @direction) %></th>
 		<th><%= "Disciplines" %></th>
 		<th><%= sort_by_link("quantity", @direction) %></th>
+		<th><%= sort_by_link("rating", @direction) %></th>
 		<th><%= sort_by_link("price", @direction) %></th>
 		<% if is_admin? %>
 			<th>Part number</th>
@@ -24,6 +25,13 @@
 		<td><%= bike.components %></td>
 		<td><%= bike.discipline_names %></td>
 		<td><%= bike.qty_available %></td>
+		<td>
+			<% if bike.rating == 0 %>
+				No reviews
+			<% else %>
+				<%= bike.rating %>
+			<% end %>
+		</td>
 		<td><%= bike.price %></td>
 		<% if is_admin? %>
 			<td><%= bike.part_number %></td>

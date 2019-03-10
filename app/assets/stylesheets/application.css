@@ -13,7 +13,35 @@
  *= require_tree .
  *= require_self
  */
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	margin: 40px;
+}
+div.hint {
+	font-style: italic;
+	font-size: smaller;
+}
+
+div.nav {
+	margin: 10px;
+}
+
+div.nav a, th a {
+	background-color: #a9a9a9;
+	color: white;
+	text-decoration: none;
+	padding: 2px;
+	margin: 2px;
+}
+
+div.nav a:hover, th a:hover {
+	background-color: black;
+}
 
 div.field_with_errors {
 	background-color: red;
 }
+

@@ -24,7 +24,8 @@
     </div>
     <%= link_to "Home", root_path %>
     <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user) %> <%= logout_link %> <br>
+      <%= link_to "Profile", user_path(current_user) %>
+      <%= logout_link %><br>
     <% end %>
     <div class="block"><%= link_to_cart(cart_qty) %></div>
     <hr>

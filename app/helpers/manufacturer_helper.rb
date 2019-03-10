@@ -14,7 +14,7 @@ module ManufacturerHelper
 	end
 
 	def frame_total_count(name)
-		Bike.by_frame(name).count
+		Bike.frame_match(name).count
 	end
 
 	def link_to_admin_or_user(man)

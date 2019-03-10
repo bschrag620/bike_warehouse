@@ -3,16 +3,16 @@ class Admin::FramesController < Admin::BaseController
 	def destroy
 		@frame = Frame.find(params[:id])
 		
-		if !params[:redirect].empty?
+		if !params[:redirect].nil?
 			set_redirect(params[:redirect])
 		end
 		if @frame.total_count == 0
 			flash[:message] = "#{@frame.name} removed from database."
 			@frame.destroy
 			if redirect?
-				clear_redirect
+				redirect_to clear_redirect
 			else
-				redirect_to admin_manufacturers_path
+				redirect_to admin_frames_path
 			end
 		else
 			@frame.errors.add("There are bikes in the database associated with this frame. It can not be deleted at this time.")
@@ -76,7 +76,7 @@ class Admin::FramesController < Admin::BaseController
 
 	private
 	def frame_params
-		params.require(:frame).permit(:name, :manufacturer_id)
+		params.require(:frame).permit(:name, :manufacturer_id, :discipline_ids => [])
 	end	
 
 	def discipline_params

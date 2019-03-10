@@ -5,3 +5,4 @@
 	<%= render 'form', man: @man, f: f %>
 	<%= submit_tag "Edit Manufacturer" %>
 <% end %>
+<%= delete_button(admin_manufacturer_path(@man)) %>

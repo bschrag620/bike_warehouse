@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-	belongs_to :bike
+	belongs_to :frame
 	belongs_to :user
 
 	validates :comment, :presence => true

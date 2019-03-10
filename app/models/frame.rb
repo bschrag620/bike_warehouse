@@ -3,6 +3,7 @@ class Frame < ApplicationRecord
 
 	has_many :frame_disciplines
 	has_many :disciplines, through: :frame_disciplines
+	has_many :reviews
 
 	validates :name, presence: true, uniqueness: true
 
@@ -12,6 +13,10 @@ class Frame < ApplicationRecord
 
 	def manufacturer_name
 		self.manufacturer.name
+	end
+
+	def rating
+		Frame.joins(:reviews).where("reviews.frame_id = ?", self.id).average("reviews.rating").to_f.round(1)
 	end
 
 	def self.excluding_manufacturer(manufacturer)

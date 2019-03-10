@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 			resources :bikes, only: [:index]
 		end
 
-		resources :frames, only: [:index, :show, :edit, :update, :create, :new]
+		resources :frames, only: [:index, :show, :edit, :update, :create, :new, :destroy]
 
 		resources :users do
 			resources :purchases, only: [:index, :show]
@@ -42,8 +42,8 @@ Rails.application.routes.draw do
 		patch '/checkout/:id/payment', to: 'purchases#update', as: 'purchase'
 		get '/receipt/:id', to: 'purchases#show', as: 'receipt'
 
-		resources :shipping_addresses, only: [:edit, :update, :destroy]
-		resources :billing_addresses, only: [:edit, :update, :destroy]
+		resources :shipping_addresses, only: [:create, :edit, :update, :destroy]
+		resources :billing_addresses, only: [:create, :edit, :update, :destroy]
 		resources :purchases, only: [:index]
 	end
 	get '/users', to: 'session#signup'
