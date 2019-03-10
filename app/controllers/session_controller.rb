@@ -21,11 +21,15 @@ class SessionController < ApplicationController
 	end
 
 	def login
-
+		if logged_in?
+			flash[:message] = "Already logged in."
+			redirect_to root_path
+		end
 	end
 
 	def signup
 		if logged_in?
+			flash[:message] = "Already logged in."
 			redirect_to root_path
 		end
 		@user = User.new

@@ -69,23 +69,23 @@ class Bike < ApplicationRecord
 	end
 
 	def self.order_by_manufacturer(direction)
-		joins(frame: :manufacturer).order("manufacturers.name #{direction}")
+		joins(frame: :manufacturer).group("part_number").order("manufacturers.name #{direction}")
 	end
 
 	def self.order_by_frame(direction)
-		joins(:frame).order("frames.name #{direction}")
+		joins(:frame).group("part_number").order("frames.name #{direction}")
 	end
 
 	def self.order_by_components(direction)
-		order("components #{direction}")
+		group("part_number").order("components #{direction}")
 	end
 
 	def self.order_by_price(direction)
-		order("price #{direction}")
+		group("part_number").order("price #{direction}")
 	end
 
 	def self.order_by_size(direction)
-		order("size #{direction}")
+		group("part_number").order("size #{direction}")
 	end
 
 	def self.order_by_color(direction)
