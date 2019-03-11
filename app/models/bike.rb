@@ -1,7 +1,8 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
 	belongs_to :purchase, optional: true
-	has_many :reviews, through: :frames
+	has_many :reviews, through: :frame
+	has_many :disciplines, through: :frame
 
 	before_validation :set_serial
 	after_validation :set_part_number
