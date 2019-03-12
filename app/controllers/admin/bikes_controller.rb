@@ -1,8 +1,18 @@
 class Admin::BikesController < Admin::BaseController
 
 	def new
-		@bike = Bike.new
-	end
+		if !params[:manufacturer_id].nil?
+			@bike = Bike.new
+			@manufacturers = [Manufacturer.find(params[:manufacturer_id])]
+		elsif !params[:frame_id].nil?
+			frame = Frame.find(params[:frame_id])
+			@bike = frame.bikes.build
+			@manufacturers = [@bike.manufacturer]
+		else
+			@manufacturers = Manufacturer.all
+			@bike = Bike.new
+		end
+	end	
 
 	def create
 		@bike = Bike.create(bike_params)

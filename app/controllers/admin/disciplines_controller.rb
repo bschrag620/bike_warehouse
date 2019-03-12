@@ -3,6 +3,20 @@ class Admin::DisciplinesController < Admin::BaseController
 		@disciplines = Discipline.all
 	end
 
+	def new
+		@discipline = Discipline.new
+	end
+
+	def create
+		@discipline = Discipline.create(discipline_params)
+
+		if @discipline.save
+			redirect_to admin_base_new_path
+		else
+			render :edit
+		end
+	end
+
 	def edit
 		@discipline = Discipline.find(params[:id])
 	end

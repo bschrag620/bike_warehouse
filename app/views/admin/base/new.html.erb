@@ -1,0 +1,19 @@
+<h1>New data</h1>
+Choose the category of data to create: <br>
+<%= link_to "Manufacturers", new_admin_manufacturer_path %> <br>
+<%= link_to "Frames", new_admin_frame_path %> <br>
+<%= link_to "Bikes", new_admin_bike_path %> <br>
+<%= link_to "Disicplines", new_admin_discipline_path %> <br>
+
+<h3>Add Bikes by Manufacturer</h3>
+<ul>
+	<% @manufacturers.each do |man| %>
+		<%= link_to man.name, new_admin_manufacturer_bike_path(man) %> <br>
+	<% end %>
+</ul>
+<h3>Add Bikes by Frame</h3>
+<ul>
+	<% @frames.each do |frame| %>
+		<%= link_to frame.name, new_admin_frame_bike_path(frame) %> <br>
+	<% end %>
+</ul>

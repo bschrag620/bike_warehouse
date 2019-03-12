@@ -11,6 +11,11 @@ class Admin::BaseController < ApplicationController
 
 	end
 
+	def new
+		@manufacturers = Manufacturer.all
+		@frames = Frame.all
+	end
+
 	private
 	def authorized_user?
 		if !is_admin?

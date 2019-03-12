@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   get 'reviews/create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-	resources :bikes, :manufacturers, :frame, only: [:show, :index]
+	resources :frame, only: [:show, :index]
 	get '/bikes/sort/:category/:direction', to: 'bikes#index', as: 'bikes_sort'
 
-	resources :manufacturers, :disciplines do
+	resources :manufacturers, :disciplines, only: [:show, :index] do
 		resources :bikes, only: [:index]
 		get 'bikes/sort/:category/:direction', to: 'bikes#index', as: 'bikes_sort'
 	end
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 		resources :bikes
 		
 		resources :manufacturers do
-			resources :bikes, only: [:index]
+			resources :bikes, only: [:index, :new, :create]
 		end
 		
 		resources :purchases, only: [:index, :show, :destroy]
@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 			resources :bikes, only: [:index]
 		end
 
-		resources :frames, only: [:index, :show, :edit, :update, :create, :new, :destroy]
+		resources :frames, only: [:index, :show, :edit, :update, :create, :new, :destroy] do
+			resources :bikes, only: [:new, :create]
+		end
 
 		resources :users do
 			resources :purchases, only: [:index, :show]
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
 		get '', to: 'base#index'
 		get '/inventory', to: 'base#inventory', as: 'base'
 		get '/inventory/edit', to: 'base#edit', as: 'base_edit'
+		get '/inventory/new', to: 'base#new', as: 'base_new'
 	end
 
 	# user routes for signup, login, logout

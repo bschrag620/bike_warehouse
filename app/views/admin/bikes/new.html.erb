@@ -1,5 +1,5 @@
 <h1>Add Bike</h1>
 <%= form_for [:admin, @bike] do |f| %>
-	<%= render 'form', bike: @bike, f: f %>
+	<%= render 'form', bike: @bike, f: f, manufacturers: @manufacturers %>
 	<%= submit_tag "Add Bike" %>  
 <% end %>

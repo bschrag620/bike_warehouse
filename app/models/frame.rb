@@ -1,6 +1,7 @@
 class Frame < ApplicationRecord
 	belongs_to :manufacturer
 
+	has_many :bikes
 	has_many :frame_disciplines
 	has_many :disciplines, through: :frame_disciplines
 	has_many :reviews
