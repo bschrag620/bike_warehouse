@@ -1,11 +1,13 @@
 # bike_warehouse
 
-Rails project for learn.co
+To install, fork the repo. 
+Run:
+`bundle install`
 
-Bike warehouse web app to track bike inventory. Bikes will have properties of
--size
--color
--type
--price
+Follow by:
+`rake db:migrate && rake db:seed`
 
-Users will be able to login by creating an account or utilizing omniauth Facebook, Google, etc. Users can browse inventory, sorted by bike attributes as well as individual warehouses. Users can select bikes and add them to a cart to be purchased.
+This should generate a few items in the database. Run:
+
+`rails s` 
+to launch the app. Then navigate to `localhost:3000` to get started.
