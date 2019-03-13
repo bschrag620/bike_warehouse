@@ -65,7 +65,16 @@ class Admin::BikesController < Admin::BaseController
 	end
 
 	def destroy
+		@bike = Bike.find(params[:id])
 
+		if @bike.is_available
+			flash_destroy(@bike.full_name)
+			@bike.destroy
+		else
+			flash_custom("Bike can not be deleted at this time.")
+		end
+		
+		redirect_to admin_bikes_path	
 	end
 
 	private

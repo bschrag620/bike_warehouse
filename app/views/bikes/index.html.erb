@@ -3,7 +3,9 @@
 	<tr>
 		<th><%= sort_by_link("manufacturer", @direction) %></th>
 		<th><%= sort_by_link("frame", @direction) %></th>
-		<th><%= sort_by_link("size", @direction) %></th>
+		<% if !is_admin? %>
+			<th><%= sort_by_link("size", @direction) %></th>
+		<% end %>
 		<th><%= sort_by_link("components", @direction) %></th>
 		<th><%= "Disciplines" %></th>
 		<th><%= sort_by_link("quantity", @direction) %></th>
@@ -24,7 +26,9 @@
 		<td><%= bike.size %></td>
 		<td><%= bike.components %></td>
 		<td><%= bike.discipline_names %></td>
-		<td><%= bike.qty_available %></td>
+		<% if !is_admin? %>
+			<td><%= bike.qty_available %></td>
+		<% end %>
 		<td>
 			<% if bike.rating == 0 %>
 				No reviews

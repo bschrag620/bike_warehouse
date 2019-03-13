@@ -3,3 +3,4 @@
 	<%= render 'form', bike: @bike, f: f, manufacturers: @manufacturers %>
 	<%= submit_tag %>
 <% end %>
+<%= button_to("Delete bike", admin_bike_path(@bike), :method => 'delete') if @bike.is_available %>
