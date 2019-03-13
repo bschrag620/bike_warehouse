@@ -1,6 +1,9 @@
 class Bike < ApplicationRecord
 	belongs_to :frame
 	belongs_to :purchase, optional: true
+
+	has_one :manufacturer, through: :frame
+	
 	has_many :reviews, through: :frame
 	has_many :disciplines, through: :frame
 
@@ -10,6 +13,26 @@ class Bike < ApplicationRecord
 
 	validates :serial, :frame_id, :size, :components, :price, :color, :year, presence: :true
 	validates :price, :size, :year, numericality: {integer_only: true}
+
+	scope :by_part_numbers, -> {
+		group(:part_numbers)
+	}
+
+	scope :order_by_components, ->(dir) {
+		by_part_numbers.order("components #{dir}")
+	}
+
+	scope :order_by_price, ->(dir) {
+		by_part_numbers.order("price #{dir}")
+	}
+
+	scope :order_by_color, ->(dir) {
+		by_part_numbers.order("color #{dir}")
+	}
+
+	scope :order_by_size, ->(dir) {
+		by_part_numbers.order("size #{dir}")
+	}
 
 	def self.all_(category)
 		Bike.all.pluck(category).uniq
@@ -77,22 +100,6 @@ class Bike < ApplicationRecord
 		joins(:frame).group("part_number").order("frames.name #{direction}")
 	end
 
-	def self.order_by_components(direction)
-		group("part_number").order("components #{direction}")
-	end
-
-	def self.order_by_price(direction)
-		group("part_number").order("price #{direction}")
-	end
-
-	def self.order_by_size(direction)
-		group("part_number").order("size #{direction}")
-	end
-
-	def self.order_by_color(direction)
-		order("color #{direction}")	
-	end
-
 	def self.order_by_rating(direction)
 		left_joins(frame: :reviews).group("part_number").select("bikes.*, avg(reviews.rating) as rating").order("rating #{direction}")
 	end
@@ -114,10 +121,6 @@ class Bike < ApplicationRecord
 	def frame_name
 		self.frame.name
 	end
-
-	def manufacturer
-		self.frame.manufacturer
-	end	
 
 	def manufacturer_name
 		self.manufacturer.name
@@ -141,7 +144,6 @@ class Bike < ApplicationRecord
 		self.frame.rating
 	end
 
-	private
 	def set_serial
 		if self.serial.nil?
 			self.serial = (Time.now.to_f * 1000).floor

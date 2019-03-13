@@ -16,12 +16,13 @@ class Admin::BikesController < Admin::BaseController
 
 	def create
 		@bike = Bike.create(bike_params)
+		binding.pry
 		@bike.set_serial
 		
 		if @bike.save
 			redirect_to admin_bike_path(@bike)
 		else
-			binding.pry
+			@manufacturers = Manufacturer.all
 			render :new
 		end
 	end
@@ -70,6 +71,6 @@ class Admin::BikesController < Admin::BaseController
 			.permit(
 				:frame_id, :components, 
 				:color, :serial, :year, 
-				:price, discipline_ids:[])
+				:price, :size, discipline_ids:[])
 	end
 end

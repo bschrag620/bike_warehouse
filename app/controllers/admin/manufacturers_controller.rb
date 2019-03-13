@@ -45,7 +45,8 @@ class Admin::ManufacturersController < Admin::BaseController
 		params[:manufacturer][:frame_ids] += @man.frame_ids
 		@man.update(manufacturer_params)
 		if @man.save
-			redirect_to admin_manufacturer_path(@man)
+			flash[:message] = "Manufactuer updated."
+			redirect_to admin_manufacturers_path
 		else
 			render :edit
 		end
