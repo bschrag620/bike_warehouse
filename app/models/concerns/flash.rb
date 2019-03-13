@@ -13,5 +13,9 @@ module Flash
 		def flash_destroy(text)
 			flash[:message] = "#{text} removed from database."
 		end
+
+		def flash_custom(text)
+			flash[:message] = text
+		end
 	end
 end

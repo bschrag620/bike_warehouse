@@ -14,7 +14,7 @@ class Admin::FramesController < Admin::BaseController
 				redirect_to admin_frames_path
 			end
 		else
-			flash[:message] = "There are bikes in the database associated with this frame. It can not be deleted at this time."
+			flash_custom("There are bikes in the database associated with this frame. It can not be deleted at this time.")
 			redirect_to admin_frames_path
 		end
 	end
