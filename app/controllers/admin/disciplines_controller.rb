@@ -11,6 +11,7 @@ class Admin::DisciplinesController < Admin::BaseController
 		@discipline = Discipline.create(discipline_params)
 
 		if @discipline.save
+			flash_create("Discipline")
 			redirect_to admin_base_new_path
 		else
 			render :edit
@@ -30,7 +31,7 @@ class Admin::DisciplinesController < Admin::BaseController
 
 		@discipline.update(discipline_params)
 		if @discipline.save
-			flash[:message] = "Discpline updated."
+			flash_update("Discipline")
 			redirect_to admin_disciplines_path
 		else
 			render :edit

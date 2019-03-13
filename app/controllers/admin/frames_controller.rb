@@ -6,8 +6,7 @@ class Admin::FramesController < Admin::BaseController
 		if !params[:redirect].nil?
 			set_redirect(params[:redirect])
 		end
-		if @frame.total_count == 0
-			flash[:message] = "#{@frame.name} removed from database."
+			flash_destroy(@frame.name)
 			@frame.destroy
 			if redirect?
 				redirect_to clear_redirect
@@ -15,8 +14,8 @@ class Admin::FramesController < Admin::BaseController
 				redirect_to admin_frames_path
 			end
 		else
-			@frame.errors.add("There are bikes in the database associated with this frame. It can not be deleted at this time.")
-			redirect_to admin_frame_path(@frame)
+			flash[:message] = "There are bikes in the database associated with this frame. It can not be deleted at this time."
+			redirect_to admin_frames_path
 		end
 	end
 
@@ -40,6 +39,7 @@ class Admin::FramesController < Admin::BaseController
 		@frame.update(frame_params)
 
 		if @frame.save
+			flash_update(@frame.name)
 			if redirect?
 					redirect_to clear_redirect
 				else
@@ -64,14 +64,11 @@ class Admin::FramesController < Admin::BaseController
 		end
 
 		if @frame.save
+			flash_create(@flash)
 			redirect_to frame_path(@frame)
 		else
 			render :new
 		end
-	end
-
-	def show
-		@frame = Frame.find(params[:ide])
 	end
 
 	private

@@ -16,10 +16,10 @@ class Admin::BikesController < Admin::BaseController
 
 	def create
 		@bike = Bike.create(bike_params)
-		binding.pry
 		@bike.set_serial
 		
 		if @bike.save
+			flash_create(@bike.full_name)
 			redirect_to admin_bike_path(@bike)
 		else
 			@manufacturers = Manufacturer.all
@@ -49,14 +49,17 @@ class Admin::BikesController < Admin::BaseController
 
 	def edit
 		@bike = Bike.find(params[:id])
+		@manufacturers = Manufacturer.all
 	end
 
 	def update
 		@bike = Bike.find(params[:id])
 		@bike.update(bike_params)
 		if @bike.save
+			flash_update(@bike.full_name)
 			redirect_to admin_bike_path(@bike)
 		else
+			@manufacturers = Manufacturer.all
 			render :edit
 		end
 	end

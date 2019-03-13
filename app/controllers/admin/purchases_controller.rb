@@ -14,7 +14,7 @@ class Admin::PurchasesController < Admin::BaseController
 
 	def destroy
 		@purchase = Purchase.find(params[:id])
-
+		flash_destroy("Transaction #{@purchase.purchase_id}")
 		@purchase.destroy
 		redirect_to admin_purchases_path
 	end

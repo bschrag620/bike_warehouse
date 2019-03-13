@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 	include CustomRedirect
+	include Flash
+	
 	helper_method :current_user, :logged_in?, :is_admin?, :cart, :cart_lookup, :cart_qty, :cart, :cart_lookup, :cart_total, :tax
 
 	# helpers for user authentication

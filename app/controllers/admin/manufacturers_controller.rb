@@ -30,6 +30,7 @@ class Admin::ManufacturersController < Admin::BaseController
 		end
 
 		if @man.save
+			flash_create(@man.name)
 			if redirect?
 				redirect_to clear_redirect
 			else
@@ -45,7 +46,7 @@ class Admin::ManufacturersController < Admin::BaseController
 		params[:manufacturer][:frame_ids] += @man.frame_ids
 		@man.update(manufacturer_params)
 		if @man.save
-			flash[:message] = "Manufactuer updated."
+			flash_update(@man.name)
 			redirect_to admin_manufacturers_path
 		else
 			render :edit
@@ -54,7 +55,7 @@ class Admin::ManufacturersController < Admin::BaseController
 
 	def destroy
 		@man = Manufacturer.find(params[:id])
-		flash[:message] = "#{@man.name} has been deleted."
+		flash_destroy(@man.name)
 		@man.destroy
 
 		redirect_to admin_manufacturers_path
