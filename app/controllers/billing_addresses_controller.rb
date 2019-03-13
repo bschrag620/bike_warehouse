@@ -16,7 +16,7 @@ class BillingAddressesController < ApplicationController
 		end
 
 		if @address.save
-			flash[:message] = "Address successfully update."
+			flash_update("Billing address successfully")
 			redirect_to user_path(@address.user)
 		else
 			render :edit
@@ -29,7 +29,7 @@ class BillingAddressesController < ApplicationController
 		@address = ShippingAddress.find(params[:id])
 		@address.destroy
 
-		flash[:message] = "Address successfully deleted."
+		flash_destroy("Billing address")
 
 		redirect_to user_path(@address.user)
 	end	
