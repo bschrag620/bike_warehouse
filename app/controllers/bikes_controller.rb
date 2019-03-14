@@ -6,16 +6,8 @@ class BikesController < ApplicationController
 	end
 
 	def index
-		if params[:direction].nil?
-			direction = 'asc'
-		else
-			direction = params[:direction]
-		end
-		if params[:category].nil?
-			@category = "manufacturer"
-		else
-			@category = params[:category]
-		end
+		direction = params[:direction] || 'asc'
+		@category = params[:category] || 'manufacturer'
 		
 		if !params[:manufacturer_id].nil?
 			@man = Manufacturer.find(params[:manufacturer_id])
@@ -27,12 +19,8 @@ class BikesController < ApplicationController
 			@bikes = Bike.unique_bikes
 		end
 
-		if direction == 'asc'
-			@direction = 'desc'
-		else
-			@direction = 'asc'
-		end
-
+		@direction = direction == 'asc' ? 'desc' : 'asc'
+		
 		@bikes = @bikes.ordered_by(@category, direction)
 	end
 end

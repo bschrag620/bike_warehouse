@@ -10,10 +10,10 @@ class UsersController < SessionController
 
 		if !@user.save
 			render 'session/signup'
+		else
+			session_login(@user)
+			redirect_to root_path
 		end
-
-		session_login(@user)
-		redirect_to root_path
 	end
 
 	def update
@@ -42,7 +42,7 @@ class UsersController < SessionController
 
 	private
 	def user_params
-		params.require(:user).permit(:username, :password_digest, :password_digest_confirmation, :email, :phone_number, :is_admin)
+		params.require(:user).permit(:username, :password, :password_confirmation, :email, :phone_number, :is_admin)
 	end
 
 	def shipping_address_params

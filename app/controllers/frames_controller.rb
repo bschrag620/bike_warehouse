@@ -1,7 +1,11 @@
 class FramesController < ApplicationController
 
 	def index
-		@frames = Frame.all
+		if params[:user_id].nil?
+			@frames = Frame.all
+		else
+			@frames= User.find(params[:user_id]).frames
+		end
 	end
 
 	def show

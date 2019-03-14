@@ -42,8 +42,8 @@ class SessionController < ApplicationController
 			set_redirect(root_path)
 		end
 		user = User.find_by(:username => params[:username])
-		
-		if user && user.authenticate(params[:password_digest])
+
+		if user && user.authenticate(params[:password])
 			session_login(user)
 			if is_admin?
 				redirect_to admin_path

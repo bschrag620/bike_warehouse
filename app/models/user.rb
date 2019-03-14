@@ -1,13 +1,13 @@
 class User < ApplicationRecord
 	validates :username, presence: true, uniqueness: true
-	validates :password_digest, confirmation: true, :if => :not_uid
-	validates :password_digest_confirmation, presence: true, on: :create, :if => :not_uid
 	validates :email, presence: true
+	validates_confirmation_of :email
 
 	has_many :purchases
 	has_many :shipping_addresses
 	has_many :billing_addresses
 	has_many :reviews
+	has_many :frames, through: :reviews
 
 	accepts_nested_attributes_for :shipping_addresses
 	accepts_nested_attributes_for :billing_addresses

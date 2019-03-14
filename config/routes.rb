@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 		patch '/checkout/:id/payment', to: 'purchases#update', as: 'purchase'
 		get '/receipt/:id', to: 'purchases#show', as: 'receipt'
 
+		resources :frames, only: [:index]
 		resources :shipping_addresses, only: [:create, :edit, :update, :destroy]
 		resources :billing_addresses, only: [:create, :edit, :update, :destroy]
 		resources :purchases, only: [:index]
