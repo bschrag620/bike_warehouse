@@ -20,7 +20,11 @@ class BikesController < ApplicationController
 		end
 
 		@direction = direction == 'asc' ? 'desc' : 'asc'
-		
 		@bikes = @bikes.ordered_by(@category, direction)
+
+		respond_to do |format|
+			format.html
+			format.json { render :json => @bikes }
+		end
 	end
 end
