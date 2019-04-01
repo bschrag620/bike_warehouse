@@ -153,4 +153,5 @@ class Bike < ApplicationRecord
 	def set_part_number
 		self.part_number = "#{self.year.to_s[-2..-1]}#{self.manufacturer_name[0..3].upcase}-#{self.frame_name[0..2].upcase}-#{self.size}-#{self.components[0..2].upcase}-#{self.color[0..2].upcase}"
 	end
+
 end
