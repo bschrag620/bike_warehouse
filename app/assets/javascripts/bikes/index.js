@@ -3,6 +3,21 @@ console.log('loading index.js')
 var direction = 'asc'
 var category = 'manufacturer'
 
+bikeCache = []
+
+class Bike {
+	constructor(bike) {
+		this.frame_name = bike.frame_name
+		this.size = bike.size
+		this.components = bike.components
+		this.quantity = bike.quantity
+		this.rating = bike.rating
+		this.price = bike.price
+		bikeCache.push(bike)
+		console.log(`${bike.id} added to cache, length: `, Object.keys(bikeCache).length)
+	}
+}
+
 $(document).ready(function() {
 	console.log('index loaded');
 	retrieveBikes();
@@ -47,9 +62,13 @@ function createTd(obj, field) {
 	return td
 }
 
+function bikesToCache(bikes) {
+	bikes.forEach( (bike) => new Bike(bike))
+}
+
 function retrieveBikes(data = {category: category, direction: direction}) {
 	$.get('/bikes.json', data, (resp) => {
-	}).done((bikes) => loadBikesTable(bikes))
+	}).done((bikes) => bikesToCache(bikes))
 }
 
 function emptyTable() {
