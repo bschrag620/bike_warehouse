@@ -1,0 +1,20 @@
+<table id='bikes-table'>
+	<tr>
+		<th>Manufacturer</th>
+		<th>Frame</th>
+		<% if !is_admin? %>
+			<th>Size</th>
+		<% end %>
+		<th>Components</th>
+		<th>Quantity</th>
+		<th>Rating</th>
+		<th>Price</th>
+		<% if is_admin? %>
+			<th>Part number</th>
+			<th>Serial number</th>
+			<th>Status</th>
+			<th></th>
+		<% end %>
+		<th></th>
+	</tr>
+</table>

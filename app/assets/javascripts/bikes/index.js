@@ -1,7 +1,8 @@
 console.log('loading index.js')
 
-direction = 1
-bikeCache = []
+var direction = 1
+var category = 'price'
+var bikeCache = []
 
 class Bike {
 	constructor(bike) {
@@ -10,6 +11,7 @@ class Bike {
 	}
 
 	static sortBy(fieldName) {
+		category = fieldName
 		return bikeCache.sort( (a, b) => {
 			let comparator = 0;
 			if (a[fieldName] < b[fieldName]) {
@@ -25,7 +27,7 @@ class Bike {
 
 $(document).ready(function() {
 	console.log('index loaded');
-	retrieveBikes();
+	retrieveBikes(loadBikesTable);
 	addListenersToHeaders();
 })
 
@@ -61,16 +63,21 @@ function bikesToCache(bikes) {
 	bikes.forEach( (bike) => new Bike(bike))
 }
 
-function retrieveBikes() {
+function retrieveBikes(callback) {
 	$.get('/bikes.json', (resp) => {
-	}).done((bikes) => bikesToCache(bikes))
+	}).done((bikes) => { 
+		bikesToCache(bikes);
+		if (callback) {
+			callback();
+		}
+	})
 }
 
 function emptyTable() {
 	$('tr').slice(1).remove()
 }
 
-function loadBikesTable(fieldName='price') {
+function loadBikesTable(fieldName=category) {
 	table = $('#bikes-table')
 
 	// empty the table 
