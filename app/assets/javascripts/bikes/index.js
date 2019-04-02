@@ -103,6 +103,16 @@ function loadBikesTable(fieldName=category) {
 	})	
 }
 
+function showTable() {
+	$('#table').show()
+	$('#show').hide()
+}
+
+function hideTable() {
+	$('#show').show()
+	$('#table').hide()
+}
+
 
 
 
