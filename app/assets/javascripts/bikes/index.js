@@ -44,8 +44,7 @@ function retrieveBikes(data = {category: category, direction: direction}) {
 }
 
 function emptyTable() {
-	tableData = $("#bikes-table td")
-	tableData.empty()
+	$('tr').slice(1).remove()
 }
 
 function loadBikesTable(bikes) {
@@ -63,7 +62,6 @@ function loadBikesTable(bikes) {
 		tr.append(createTd(bike, 'frame_name'))
 		tr.append(createTd(bike, 'size'))
 		tr.append(createTd(bike, 'components'))
-		tr.append(createTd(bike, 'discipline_names'))
 		tr.append(createTd(bike, 'quantity'))
 		td = createTd(bike, 'rating')
 		if (td.innerText === '0') {
