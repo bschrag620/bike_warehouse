@@ -1,16 +1,16 @@
 <h1>Bikes</h1>
 <table id='bikes-table'>
 	<tr>
-		<th><%= sort_by_link("manufacturer", @direction) %></th>
-		<th><%= sort_by_link("frame", @direction) %></th>
+		<th>Manufacturer</th>
+		<th>Frame</th>
 		<% if !is_admin? %>
-			<th><%= sort_by_link("size", @direction) %></th>
+			<th>Size</th>
 		<% end %>
-		<th><%= sort_by_link("components", @direction) %></th>
-		<th><%= "Disciplines" %></th>
-		<th><%= sort_by_link("quantity", @direction) %></th>
-		<th><%= sort_by_link("rating", @direction) %></th>
-		<th><%= sort_by_link("price", @direction) %></th>
+		<th>Components</th>
+		<th>Disciplines</th>
+		<th>Quantity</th>
+		<th>Rating</th>
+		<th>Price</th>
 		<% if is_admin? %>
 			<th>Part number</th>
 			<th>Serial number</th>

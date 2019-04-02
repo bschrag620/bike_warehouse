@@ -7,7 +7,7 @@ module BikesHelper
 	def sort_by_link(category, direction)
 		current_path = request.original_fullpath
 		base_path = current_path.split('/sort')[0]
-		link_to category.capitalize, "#{base_path}/sort/#{category}/#{direction}"
+		link_to category.capitalize, "#{base_path}/sort/#{category}/#{direction}", id: category
 	end
 
 	def button_for_cart_or_edit(bike)
