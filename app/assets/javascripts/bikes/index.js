@@ -1,20 +1,32 @@
 console.log('loading index.js')
 
-var direction = 'asc'
-var category = 'manufacturer'
-
+direction = 1
 bikeCache = []
 
 class Bike {
 	constructor(bike) {
-		this.frame_name = bike.frame_name
-		this.size = bike.size
+		this.frame = bike.frame_name
+		this.size = parseInt(bike.size)
 		this.components = bike.components
-		this.quantity = bike.quantity
+		this.quantity = parseInt(bike.quantity)
 		this.rating = bike.rating
-		this.price = bike.price
-		bikeCache.push(bike)
+		this.price = parseInt(bike.price)
+		this.manufacturer = bike.manufacturer_name
+		bikeCache.push(this)
 		console.log(`${bike.id} added to cache, length: `, Object.keys(bikeCache).length)
+	}
+
+	static sortBy(fieldName) {
+		return bikeCache.sort( (a, b) => {
+			let comparator = 0;
+			if (a[fieldName] < b[fieldName]) {
+				comparator = 1
+			} else if (a[fieldName] > b[fieldName]) {
+				comparator = -1
+			}
+
+			return direction * comparator
+		 })
 	}
 }
 
@@ -24,14 +36,6 @@ $(document).ready(function() {
 	addListenersToHeaders();
 })
 
-function swapDirection() {
-	if (direction === 'asc') {
-		direction = 'desc'
-	} else {
-		direction = 'asc'
-	}
-}
-
 function addListenersToHeaders() {
 	tableHeaders = $('th').toArray()
 	tableHeaders.forEach(function(th) {
@@ -39,10 +43,8 @@ function addListenersToHeaders() {
 		$(th).css('cursor', 'pointer')
 
 		th.addEventListener('click', function() {
-			url = '/bikes/sort/' + th.innerText.toLowerCase() + '/' + direction
-			data = {category: th.innerText.toLowerCase(), direction: direction}
-			retrieveBikes(data);
-			swapDirection();
+			loadBikesTable(th.innerText.toLowerCase())
+			direction *= -1
 		})
 	})
 }
@@ -66,8 +68,8 @@ function bikesToCache(bikes) {
 	bikes.forEach( (bike) => new Bike(bike))
 }
 
-function retrieveBikes(data = {category: category, direction: direction}) {
-	$.get('/bikes.json', data, (resp) => {
+function retrieveBikes() {
+	$.get('/bikes.json', (resp) => {
 	}).done((bikes) => bikesToCache(bikes))
 }
 
@@ -75,20 +77,20 @@ function emptyTable() {
 	$('tr').slice(1).remove()
 }
 
-function loadBikesTable(bikes) {
+function loadBikesTable(fieldName='price') {
 	table = $('#bikes-table')
 
 	// empty the table 
 	emptyTable();
 
-	bikes.forEach( (bike) => {
+	Bike.sortBy(fieldName).forEach( (bike) => {
 		tr = document.createElement('tr')
 
 		// set some attributes for the row
 		$(tr).attr('data-id', bike.id)
 		addListenerToRow(tr)
-		tr.append(createTd(bike, 'manufacturer_name'))
-		tr.append(createTd(bike, 'frame_name'))
+		tr.append(createTd(bike, 'manufacturer'))
+		tr.append(createTd(bike, 'frame'))
 		tr.append(createTd(bike, 'size'))
 		tr.append(createTd(bike, 'components'))
 		tr.append(createTd(bike, 'quantity'))
