@@ -32,6 +32,15 @@ function addListenersToHeaders() {
 	})
 }
 
+function addListenerToRow(row) {
+	// change cursor hover state
+	$(row).css('cursor', 'pointer')
+	row.addEventListener('click',function() {
+		url = '/bikes/' + $(this).data('id')
+		window.location = url
+	})
+}
+
 function createTd(obj, field) {
 	td = document.createElement('td')
 	td.innerText = obj[field];
@@ -55,9 +64,10 @@ function loadBikesTable(bikes) {
 
 	bikes.forEach( (bike) => {
 		tr = document.createElement('tr')
+
 		// set some attributes for the row
 		$(tr).attr('data-id', bike.id)
-		
+		addListenerToRow(tr)
 		tr.append(createTd(bike, 'manufacturer_name'))
 		tr.append(createTd(bike, 'frame_name'))
 		tr.append(createTd(bike, 'size'))
