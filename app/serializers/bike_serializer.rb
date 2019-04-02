@@ -6,8 +6,10 @@ class BikeSerializer < ActiveModel::Serializer
    	:part_number, 
    	:price, :color,
    	:manufacturer_name,
-   	:frame_name,
    	:rating,
    	:quantity,
    	:discipline_names
+
+  attribute :frame_name, key: :frame
+  attribute :manufacturer_name, key: :manufacturer
 end

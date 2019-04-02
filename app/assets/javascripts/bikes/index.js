@@ -5,14 +5,7 @@ bikeCache = []
 
 class Bike {
 	constructor(bike) {
-		this.frame = bike.frame_name
-		this.size = parseInt(bike.size)
-		this.components = bike.components
-		this.quantity = parseInt(bike.quantity)
-		this.rating = bike.rating
-		this.price = parseInt(bike.price)
-		this.manufacturer = bike.manufacturer_name
-		bikeCache.push(this)
+		bikeCache.push(bike)
 		console.log(`${bike.id} added to cache, length: `, Object.keys(bikeCache).length)
 	}
 
@@ -85,7 +78,6 @@ function loadBikesTable(fieldName='price') {
 
 	Bike.sortBy(fieldName).forEach( (bike) => {
 		tr = document.createElement('tr')
-
 		// set some attributes for the row
 		$(tr).attr('data-id', bike.id)
 		addListenerToRow(tr)
