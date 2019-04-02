@@ -1,5 +1,5 @@
 <h1>Bikes</h1>
-<table>
+<table id='bikes-table'>
 	<tr>
 		<th><%= sort_by_link("manufacturer", @direction) %></th>
 		<th><%= sort_by_link("frame", @direction) %></th>
@@ -19,32 +19,7 @@
 		<% end %>
 		<th></th>
 	</tr>
-<% @bikes.each do |bike| %>
-	<tr>
-		<td><%= bike.manufacturer_name %></td>
-		<td><%= bike.frame_name %></td>
-		<td><%= bike.size %></td>
-		<td><%= bike.components %></td>
-		<td><%= bike.discipline_names %></td>
-		<% if !is_admin? %>
-			<td><%= bike.qty_available %></td>
-		<% end %>
-		<td>
-			<% if bike.rating == 0 %>
-				No reviews
-			<% else %>
-				<%= bike.rating %>
-			<% end %>
-		</td>
-		<td><%= bike.price %></td>
-		<% if is_admin? %>
-			<td><%= bike.part_number %></td>
-			<td><%= bike.serial %></td>
-			<td><%= status(bike) %></td>
-			<td><%= link_to "Edit", edit_admin_bike_path(bike) %></td>
-
-		<% end %>
-		<td><%=link_to "View", choose_link(bike_path(bike)) %></td>
-	</tr>
-<% end %>
 </table>
+
+
+<%= javascript_include_tag 'bikes/index' %>

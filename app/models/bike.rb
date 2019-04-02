@@ -46,6 +46,10 @@ class Bike < ApplicationRecord
 		where("part_number = ? AND is_available = ?", pn, true).first
 	end
 
+	def quantity
+		self.qty_available
+	end
+
 	def exact_match
 		Bike.where("part_number = ?", self.part_number)
 	end
