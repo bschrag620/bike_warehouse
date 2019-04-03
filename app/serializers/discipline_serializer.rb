@@ -1,4 +1,4 @@
 class DisciplineSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :name
   belongs_to :bike
 end
