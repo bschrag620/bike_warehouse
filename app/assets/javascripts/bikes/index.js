@@ -1,36 +1,22 @@
-console.log('loading index.js')
-
 var direction = 1
 var category = 'price'
-var bikeCache = []
-
-class Bike {
-	constructor(bike) {
-		bikeCache.push(bike)
-		console.log(`${bike.id} added to cache, length: `, Object.keys(bikeCache).length)
-	}
-
-	static sortBy(fieldName) {
-		category = fieldName
-		return bikeCache.sort( (a, b) => {
-			let comparator = 0;
-			if (a[fieldName] < b[fieldName]) {
-				comparator = 1
-			} else if (a[fieldName] > b[fieldName]) {
-				comparator = -1
-			}
-
-			return direction * comparator
-		 })
-	}
-}
 
 $(document).ready(function() {
-	console.log('index loaded');
-	retrieveBikes(loadBikesTable);
-	addListenersToHeaders();
+	
+	// if we are on the bikes index page, load this stuff
+	if ($('.bikes.index').length > 0) {
+		retrieveBikes(loadBikesTable);
+		addListenersToHeaders();
+	}
+
+	// else, if we are on the bikes show page, load this stuff
+	else if ($('.bikes.show').length > 0) {
+		console.log('on bikes show page...')
+	}
 })
 
+
+// bikes index code
 function addListenersToHeaders() {
 	tableHeaders = $('th').toArray()
 	tableHeaders.forEach(function(th) {
@@ -67,9 +53,7 @@ function retrieveBikes(callback) {
 	$.get('/bikes.json', (resp) => {
 	}).done((bikes) => { 
 		bikesToCache(bikes);
-		if (callback) {
-			callback();
-		}
+		callback();
 	})
 }
 
@@ -103,16 +87,6 @@ function loadBikesTable(fieldName=category) {
 	})	
 }
 
-function showTable() {
-	$('#table').show()
-	$('#show').hide()
-}
-
-function hideTable() {
-	$('#show').show()
-	$('#table').hide()
-}
 
 
-
-
+// bikes show code
