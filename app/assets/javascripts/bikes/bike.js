@@ -2,6 +2,19 @@ var bikeCache = []
 
 class Bike {
 	constructor(bike) {
+		this.id = bike.id
+		this.color = bike.color
+		this.disciplines = bike.discplines
+		this.frame = bike.frame
+		this.manufacturer = bike.manufacturer
+		this.part_number = bike.part_number
+		this.price = bike.price
+		this.quantity = bike.quantity
+		this.rating = bike.rating
+		this.reviews = bike.reviews
+		this.size = bike.size
+		this.year = bike.year
+
 		bikeCache.push(bike)
 		console.log(`${bike.id} added to cache, length: `, Object.keys(bikeCache).length)
 	}
@@ -18,5 +31,9 @@ class Bike {
 
 			return direction * comparator
 		 })
+	}
+
+	fullName() {
+		return `${this.year} ${this.manufacturer} ${this.frame}`
 	}
 }

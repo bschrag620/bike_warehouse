@@ -1,5 +1,6 @@
 var direction = 1
 var category = 'price'
+var bikeId;
 
 $(document).ready(function() {
 	
@@ -12,6 +13,7 @@ $(document).ready(function() {
 	// else, if we are on the bikes show page, load this stuff
 	else if ($('.bikes.show').length > 0) {
 		console.log('on bikes show page...')
+		retrieveBike(loadBikeDetails);
 	}
 })
 
@@ -52,6 +54,7 @@ function bikesToCache(bikes) {
 function retrieveBikes(callback) {
 	$.get('/bikes.json', (resp) => {
 	}).done((bikes) => { 
+		debugger
 		bikesToCache(bikes);
 		callback();
 	})
@@ -90,3 +93,25 @@ function loadBikesTable(fieldName=category) {
 
 
 // bikes show code
+
+function retrieveBike(callback) {
+	bikeId = $('.bikes.show').attr('id')
+	$.get(`/bikes/${bikeId}.json`, (resp) => {
+	}).done( (bike) => {
+		callback(bike); 
+	});
+}
+
+function loadBikeDetails(bikeDetails) {
+	bike = new Bike(bikeDetails)
+	$('.bike.show').attr('id', bike.id)
+	$('h1#full_name').text(bike.full_name)
+	$('#components').text(`Components: ${bike.components}`)
+	$('#size').text(`Size: ${bike.size}`)
+	$('#color').text(`Color: ${bike.color}`)
+	$('#part_number').text(`Part number: ${bike.part_number}`)
+	qty_available = bike.quantity
+	if (qty_available === 0) { qty_available = 'Sold out'}
+	$('#qty_available').text(`Qty available: ${qty_available}`)
+	$('#price').text(`$${bike.price}`)
+}

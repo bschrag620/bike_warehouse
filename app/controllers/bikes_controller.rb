@@ -3,6 +3,11 @@ class BikesController < ApplicationController
 	def show
 		@bike = Bike.find(params[:id])
 		@review = @bike.frame.reviews.build
+
+		respond_to do |format|
+			format.html
+			format.json { render :json => @bike }
+		end	
 	end
 
 	def index
