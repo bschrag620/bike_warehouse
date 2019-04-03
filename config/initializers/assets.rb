@@ -14,4 +14,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # js file for bikes#index
-Rails.application.config.assets.precompile += %w( bikes/index.js )
