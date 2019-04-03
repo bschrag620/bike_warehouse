@@ -1,8 +1,6 @@
 <%= form_tag(add_to_cart_path) do %>
-	<%= hidden_field_tag :part_number, part_number %>
-	<% if qty > 0 %>
-		<%= label_tag :qty %>
-		<%= select_tag :qty, options_for_select((1..qty).map {|i| i}) %>
-	<% end %>
+	<%= hidden_field_tag :part_number, 'change to part_number' %>
+	<%= label_tag :qty %>
+	<%= select_tag :qty, options_for_select((1..1).map {|i| i}) %>
 	<%= submit_tag "Add to cart" %>
 <% end %>

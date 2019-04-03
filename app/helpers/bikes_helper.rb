@@ -10,11 +10,11 @@ module BikesHelper
 		link_to category.capitalize, "#{base_path}/sort/#{category}/#{direction}", id: category
 	end
 
-	def button_for_cart_or_edit(bike)
+	def button_for_cart_or_edit
 		if is_admin?
-			link_to "Edit", edit_admin_bike_path(bike)
+			render 'admin/partials/edit_link'
 		else
-			render 'session/add_to_cart_with_qty', qty: bike.qty_available, part_number: bike.part_number
+			render 'session/add_to_cart_with_qty'
 		end
 	end
 
