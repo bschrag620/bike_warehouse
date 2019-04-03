@@ -1,14 +1,14 @@
 <div class="bikes show">
-	<h1><%= @bike.full_name %></h1>
+	<h1 id='full_name'></h1>
 	<ul>
-		<li>Components: <%= @bike.components %></li>
-		<li>Size: <%= @bike.size %></li>
-		<li>Color: <%= @bike.color %></li>
-		<li>Disciplines: <%= @bike.discipline_names %></li>
-		<li>Part number: <%= @bike.part_number %></li>
-		Qty available: <%= @bike.qty_available %>
+		<li id='components'></li>
+		<li id='size'></li>
+		<li id='color'></li>
+		<li id='disciplines'></li>
+		<li id='part_number'></li>
+		<div id="qty_available"></div>
 	</ul>
-	<h3>$<%= @bike.price %></h3>
+	<h3 id='price'></h3>
 	<%= button_for_cart_or_edit(@bike) %>
 	<hr>
 	<%= render_review_form(@review) %>
