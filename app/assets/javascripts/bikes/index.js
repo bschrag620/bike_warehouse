@@ -17,6 +17,7 @@ function init() {
 	// else, if we are on the bikes show page, load this stuff
 	else if ($('.bikes.show').length > 0) {
 		retrieveBike(loadBikeDetails);
+		hijackFormSubmit();
 	}
 }
 
@@ -114,7 +115,72 @@ function loadBikeDetails(bikeDetails) {
 	bike.quantity === 0 ? qty_available = 'Sold out' : qty_available = bike.quantity
 	$('#qty_available').text(`Qty available: ${qty_available}`)
 	$('#price').text(`$${bike.price}`)
+
+	loadReviews();
 }
+
+function hijackFormSubmit() {
+	$("#new_review").submit(function(e) {
+		e.preventDefault();
+		
+		let data = $(this).serialize();
+
+		$.post('/reviews', data).done(function(resp) {
+			review = new Review(resp)
+			prependReviewBlock(review)
+		})
+	})
+}
+
+function createReviewDiv(id) {
+	let div = document.createElement('div')
+	$(div).addClass('review')
+	$(div).attr('id', id)
+	return div
+}
+
+
+// using prepend to place newest comments at the top
+function prependReviewBlock(review) {
+		let reviewsDiv = $('#reviews')
+
+		let newReviewDiv = document.createElement('div')
+
+		let nameDiv = createReviewDiv(review.id)
+		$(nameDiv).html(`<b>Username: </b>${review.username}`)
+		newReviewDiv.append(nameDiv)
+
+		let ratingDiv = createReviewDiv(review.id)
+		$(ratingDiv).html(`<b>Rating: </b>${review.rating} / 10`)
+		newReviewDiv.append(ratingDiv)
+
+		let commentDiv = createReviewDiv(review.id)
+		$(commentDiv).html(`<b>Comment: </b>${review.comment}`)
+		newReviewDiv.append(commentDiv)
+
+		let timeDiv = createReviewDiv(review.id)
+		$(timeDiv).html(`<i>${review.readableTime()}</i>`)
+		newReviewDiv.append(timeDiv)
+
+		reviewsDiv.prepend('<hr>')
+		reviewsDiv.prepend(newReviewDiv)
+		
+}
+
+function loadReviews() {
+	$('#reviews').text('')
+
+	bike.reviews.forEach( function( review ) {
+		prependReviewBlock(review)		
+	})
+}
+
+
+// conditional to catch if the page has already loaded
+// occassionally when the page is cached, it seems to 
+// miss the document.ready() call
+
+// if readyState is already complete, run init()
 
 if (document.readyState == 'complete') {
 	console.log('document loaded')

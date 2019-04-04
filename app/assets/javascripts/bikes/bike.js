@@ -11,7 +11,7 @@ class Bike {
 		this.price = bike.price
 		this.quantity = bike.quantity
 		this.rating = bike.rating
-		this.reviews = bike.reviews
+		this.reviews = Bike.createReviews(bike.reviews)
 		this.size = bike.size
 		this.year = bike.year
 
@@ -31,6 +31,12 @@ class Bike {
 
 			return direction * comparator
 		 })
+	}
+
+	static createReviews(reviews) {
+		return reviews.map( function(r) {
+			return new Review(r)
+		})
 	}
 
 	fullName() {

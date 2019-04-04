@@ -48,3 +48,10 @@ https://learn.co/tracks/full-stack-web-development-v6/rails/rails-project-mode/r
 [ ] - Must use Rails app and JS to render a form for creating a resource that submits dynamically
 
 [ ] - Must translate the JSON repsonse in JS model objects using either ES6 class or constructor syntax. Model objects must have at least one method on the prototype
+
+
+Videos to watch
+---------------
+
+https://www.youtube.com/watch?v=oHPM0ekV7zQ 
+https://www.youtube.com/watch?v=Yd0nH9CWWfo&amp=&feature=youtu.be 
