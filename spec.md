@@ -38,16 +38,16 @@ https://learn.co/tracks/full-stack-web-development-v6/rails/rails-project-mode/r
 
 ***JS project requirements***
 
-[ ] - render at least one index pag via JS and active model serialization JSON. 
+[x] - render at least one index pag via JS and active model serialization JSON. 
 	
 
-[ ] - render a show page via JS and AMS JSON
+[x] - render a show page via JS and AMS JSON
 
-[ ] - Dynamically render on the page at least one 'has-many' relationship through JSON using JS
+[x] - Dynamically render on the page at least one 'has-many' relationship through JSON using JS
 
-[ ] - Must use Rails app and JS to render a form for creating a resource that submits dynamically
+[x] - Must use Rails app and JS to render a form for creating a resource that submits dynamically
 
-[ ] - Must translate the JSON repsonse in JS model objects using either ES6 class or constructor syntax. Model objects must have at least one method on the prototype
+[x] - Must translate the JSON repsonse in JS model objects using either ES6 class or constructor syntax. Model objects must have at least one method on the prototype
 
 
 Videos to watch
