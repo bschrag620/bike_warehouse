@@ -2,8 +2,12 @@ var direction = 1
 var category = 'price'
 var bikeId;
 
-$(document).ready(function() {
-	
+$(window).load(function() {
+	console.log('document ready')
+	init()
+})
+
+function init() {
 	// if we are on the bikes index page, load this stuff
 	if ($('.bikes.index').length > 0) {
 		retrieveBikes(loadBikesTable);
@@ -12,11 +16,9 @@ $(document).ready(function() {
 
 	// else, if we are on the bikes show page, load this stuff
 	else if ($('.bikes.show').length > 0) {
-		console.log('on bikes show page...')
 		retrieveBike(loadBikeDetails);
 	}
-})
-
+}
 
 // bikes index code
 function addListenersToHeaders() {
@@ -54,7 +56,6 @@ function bikesToCache(bikes) {
 function retrieveBikes(callback) {
 	$.get('/bikes.json', (resp) => {
 	}).done((bikes) => { 
-		debugger
 		bikesToCache(bikes);
 		callback();
 	})
@@ -110,8 +111,12 @@ function loadBikeDetails(bikeDetails) {
 	$('#size').text(`Size: ${bike.size}`)
 	$('#color').text(`Color: ${bike.color}`)
 	$('#part_number').text(`Part number: ${bike.part_number}`)
-	qty_available = bike.quantity
-	if (qty_available === 0) { qty_available = 'Sold out'}
+	bike.quantity === 0 ? qty_available = 'Sold out' : qty_available = bike.quantity
 	$('#qty_available').text(`Qty available: ${qty_available}`)
 	$('#price').text(`$${bike.price}`)
+}
+
+if (document.readyState == 'complete') {
+	console.log('document loaded')
+	init();
 }
