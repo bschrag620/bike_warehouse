@@ -1,6 +1,6 @@
-var direction = 1
-var category = 'price'
-var bikeId;
+let direction = 1
+let category = 'price'
+let bikeId;
 
 
 function init() {
