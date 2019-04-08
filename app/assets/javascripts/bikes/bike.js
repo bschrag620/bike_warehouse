@@ -20,11 +20,11 @@ function init() {
 // bikes index code
 function addListenersToHeaders() {
 	tableHeaders = $('th').toArray()
-	tableHeaders.forEach(function(th) {
+	tableHeaders.forEach( (th) => {
 		// make the header appear clickable				
 		$(th).css('cursor', 'pointer')
 
-		th.addEventListener('click', function() {
+		th.addEventListener('click', () => {
 			loadBikesTable(th.innerText.toLowerCase())
 			direction *= -1
 		})
@@ -34,7 +34,7 @@ function addListenersToHeaders() {
 function addListenerToRow(row) {
 	// change cursor hover state
 	$(row).css('cursor', 'pointer')
-	row.addEventListener('click',function() {
+	row.addEventListener('click', function() {
 		url = '/bikes/' + $(this).data('id')
 		window.location = url
 	})
@@ -122,7 +122,7 @@ function hijackFormSubmit() {
 		
 		let data = $(this).serialize();
 
-		$.post('/reviews', data).done(function(resp) {
+		$.post('/reviews', data).done( (resp) => {
 			review = new Review(resp)
 			prependReviewBlock(review)
 		})
@@ -167,7 +167,7 @@ function prependReviewBlock(review) {
 function loadReviews() {
 	$('#reviews').text('')
 
-	bike.reviews.forEach( function( review ) {
+	bike.reviews.forEach( (review) => {
 		prependReviewBlock(review)		
 	})
 }
