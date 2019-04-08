@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
   def create
-    binding.pry
   	validate_current_user(params[:user_id])
   	@review = Review.create(review_params)
   	@review.user = current_user
