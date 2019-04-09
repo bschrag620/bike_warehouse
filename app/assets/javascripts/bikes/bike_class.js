@@ -4,11 +4,12 @@ class Bike {
 	constructor(bike) {
 		this.id = bike.id
 		this.color = bike.color
-		this.disciplines = bike.discplines
+		this.disciplines = bike.disciplines
 		this.frame = bike.frame
 		this.manufacturer = bike.manufacturer
 		this.part_number = bike.part_number
 		this.price = bike.price
+		this.components = bike.components
 		this.quantity = bike.quantity
 		this.rating = bike.rating
 		this.reviews = Bike.createReviews(bike.reviews)
@@ -45,5 +46,10 @@ class Bike {
 
 	fullName() {
 		return `${this.year} ${this.manufacturer} ${this.frame}`
+	}
+
+	discplineNames() {
+		return this.disciplines.map( (discipline) => discipline.name ).join(', ')
+
 	}
 }

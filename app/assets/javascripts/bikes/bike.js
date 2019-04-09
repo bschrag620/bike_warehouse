@@ -104,9 +104,10 @@ function retrieveBike(callback) {
 function loadBikeDetails(bikeDetails) {
 	bike = new Bike(bikeDetails)
 	$('.bike.show').attr('id', bike.id)
-	$('h1#full_name').text(bike.full_name)
+	$('h1#full_name').text(bike.fullName())
 	$('#components').text(`Components: ${bike.components}`)
 	$('#size').text(`Size: ${bike.size}`)
+	$('#disciplines').text(`Discplines: ${bike.discplineNames()}`)
 	$('#color').text(`Color: ${bike.color}`)
 	$('#part_number').text(`Part number: ${bike.part_number}`)
 	bike.quantity === 0 ? qty_available = 'Sold out' : qty_available = bike.quantity
