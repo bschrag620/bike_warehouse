@@ -130,39 +130,22 @@ function hijackFormSubmit() {
 	})
 }
 
-function createReviewDiv(id) {
-	let div = document.createElement('div')
-	$(div).addClass('review')
-	$(div).attr('id', id)
-	return div
-}
-
 
 // using prepend to place newest comments at the top
 function prependReviewBlock(review) {
-		let reviewsDiv = $('#reviews')
+	const reviewsDiv = $('#reviews')
 
-		let newReviewDiv = document.createElement('div')
+	const newReviewDiv = document.createElement('div')
 
-		let nameDiv = createReviewDiv(review.id)
-		$(nameDiv).html(`<b>Username: </b>${review.username}`)
-		newReviewDiv.append(nameDiv)
+	$(newReviewDiv).html(`
+			<div class='username'><b>Username: </b>${review.username}</div>
+			<div class="rating"><b>Rating: </b>${review.rating}</div>
+			<div class="comment"><b>Comment: ${review.comment}</b></div>
+			<div class="date"><i>${review.readableTime()}</i></div>
+		`)
 
-		let ratingDiv = createReviewDiv(review.id)
-		$(ratingDiv).html(`<b>Rating: </b>${review.rating} / 10`)
-		newReviewDiv.append(ratingDiv)
-
-		let commentDiv = createReviewDiv(review.id)
-		$(commentDiv).html(`<b>Comment: </b>${review.comment}`)
-		newReviewDiv.append(commentDiv)
-
-		let timeDiv = createReviewDiv(review.id)
-		$(timeDiv).html(`<i>${review.readableTime()}</i>`)
-		newReviewDiv.append(timeDiv)
-
-		reviewsDiv.prepend('<hr>')
-		reviewsDiv.prepend(newReviewDiv)
-		
+	reviewsDiv.prepend('<hr>')
+	reviewsDiv.prepend(newReviewDiv)		
 }
 
 function loadReviews() {
