@@ -6,7 +6,7 @@
 		<%= f.hidden_field :frame_id %>
 		<%= hidden_field_tag :redirect %>
 		<%= f.label :rating %>
-		<%= select_tag 'review[rating]', options_for_select((1..10).map {|i| i}.insert(0, 'choose rating...')) %>
+		<%= select_tag 'review[rating]', options_for_select((1..10).map {|i| i}.insert(0, ['choose rating...', 0])) %>
 		<%= label_text :comment, f %>
 		<%= submit_tag "Leave review", id: 'submitBtn' %>
 	<% end %>
