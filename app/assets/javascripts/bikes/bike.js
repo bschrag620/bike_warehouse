@@ -19,7 +19,7 @@ function init() {
 
 // bikes index code
 function addListenersToHeaders() {
-	tableHeaders = $('th').toArray()
+	const tableHeaders = $('th').toArray()
 	tableHeaders.forEach( (th) => {
 		// make the header appear clickable				
 		$(th).css('cursor', 'pointer')
@@ -41,7 +41,7 @@ function addListenerToRow(row) {
 }
 
 function createTd(obj, field) {
-	td = document.createElement('td')
+	const td = document.createElement('td')
 	td.innerText = obj[field];
 	return td
 }
@@ -64,13 +64,13 @@ function emptyTable() {
 }
 
 function loadBikesTable(fieldName=category) {
-	table = $('#bikes-table')
+	const table = $('#bikes-table')
 
 	// empty the table 
 	emptyTable();
 
 	Bike.sortBy(fieldName).forEach( (bike) => {
-		tr = document.createElement('tr')
+		const tr = document.createElement('tr')
 		// set some attributes for the row
 		$(tr).attr('data-id', bike.id)
 		addListenerToRow(tr)
@@ -79,12 +79,14 @@ function loadBikesTable(fieldName=category) {
 		tr.append(createTd(bike, 'size'))
 		tr.append(createTd(bike, 'components'))
 		tr.append(createTd(bike, 'quantity'))
-		td = createTd(bike, 'rating')
+		
+		const td = createTd(bike, 'rating')
 		if (td.innerText === '0') {
 			td.innerText = 'No reviews'
 		}
 		tr.append(td)
 		tr.append(createTd(bike, 'price'))
+		
 		table.append(tr)
 	})	
 }
@@ -101,7 +103,7 @@ function retrieveBike(callback) {
 }
 
 function loadBikeDetails(bikeDetails) {
-	bike = new Bike(bikeDetails)
+	const bike = new Bike(bikeDetails)
 	$('.bike.show').attr('id', bike.id)
 	$('h1#full_name').text(bike.fullName())
 	$('#components').text(`Components: ${bike.components}`)
@@ -113,14 +115,14 @@ function loadBikeDetails(bikeDetails) {
 	$('#qty_available').text(`Qty available: ${qty_available}`)
 	$('#price').text(`$${bike.price}`)
 
-	loadReviews();
+	loadReviews(bike.reviews);
 }
 
 function hijackFormSubmit() {
 	$("#new_review").submit(function(e) {
 		e.preventDefault();
-		
-		let data = $(this).serialize();
+
+		const data = $(this).serialize();
 
 		$.post('/reviews', data).done( (resp) => {
 			review = new Review(resp)
@@ -150,9 +152,9 @@ function prependReviewBlock(review) {
 	reviewsDiv.prepend(newReviewDiv)		
 }
 
-function loadReviews() {
+function loadReviews(reviews) {
 	$('#reviews').text('')
-	bike.reviews.forEach( (review) => {
+	reviews.forEach( (review) => {
 		prependReviewBlock(review)		
 	})
 }
