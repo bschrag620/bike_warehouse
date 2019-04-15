@@ -8,6 +8,6 @@
 		<%= f.label :rating %>
 		<%= select_tag 'review[rating]', options_for_select((1..10).map {|i| i}) %>
 		<%= label_text :comment, f %>
-		<%= submit_tag "Leave review" %>
+		<%= submit_tag "Leave review", id: 'submitBtn' %>
 	<% end %>
 </div>

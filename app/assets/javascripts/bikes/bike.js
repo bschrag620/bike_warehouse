@@ -92,7 +92,6 @@ function loadBikesTable(fieldName=category) {
 
 
 // bikes show code
-
 function retrieveBike(callback) {
 	bikeId = $('.bikes.show').attr('id')
 	$.get(`/bikes/${bikeId}.json`, (resp) => {
@@ -126,10 +125,13 @@ function hijackFormSubmit() {
 		$.post('/reviews', data).done( (resp) => {
 			review = new Review(resp)
 			prependReviewBlock(review)
+			// clear the form
+			document.getElementById('review_comment').value = ''
+			// re-enable the submit button
+			document.getElementById('submitBtn').disabled = false
 		})
 	})
 }
-
 
 // using prepend to place newest comments at the top
 function prependReviewBlock(review) {
@@ -142,15 +144,14 @@ function prependReviewBlock(review) {
 			<div class="rating"><b>Rating: </b>${review.rating}</div>
 			<div class="comment"><b>Comment: ${review.comment}</b></div>
 			<div class="date"><i>${review.readableTime()}</i></div>
+			<hr>
 		`)
 
-	reviewsDiv.prepend('<hr>')
 	reviewsDiv.prepend(newReviewDiv)		
 }
 
 function loadReviews() {
 	$('#reviews').text('')
-
 	bike.reviews.forEach( (review) => {
 		prependReviewBlock(review)		
 	})
