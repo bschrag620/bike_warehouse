@@ -11,7 +11,8 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
+  <<: *default
   database: bike_warehouse_production
-  pool: 5
-  timeout: 5000
+  username: bike_warehouse
+  password: <%= ENV['BIKE_WAREHOUSE_DATABASE_PASSWORD'] %>
+  
