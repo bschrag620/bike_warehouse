@@ -22,4 +22,5 @@ class BikesController < ApplicationController
 		@direction = direction == 'asc' ? 'desc' : 'asc'
 		@bikes = @bikes.ordered_by(@category, direction)
 	end
+	
 end
