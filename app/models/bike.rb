@@ -15,7 +15,7 @@ class Bike < ApplicationRecord
 	validates :price, :size, :year, numericality: {integer_only: true}
 
 	scope :by_part_numbers, -> {
-		group(:part_numbers)
+		group(:part_number)
 	}
 
 	scope :order_by_components, ->(dir) {
@@ -39,7 +39,7 @@ class Bike < ApplicationRecord
 	end
 
 	def self.unique_bikes
-		Bike.group("part_number")
+		group("part_number, bikes.id")
 	end
 
 	def self.find_available(pn)
@@ -93,11 +93,11 @@ class Bike < ApplicationRecord
 	end
 
 	def self.order_by_manufacturer(direction)
-		joins(frame: :manufacturer).group("part_number").order("manufacturers.name #{direction}")
+		joins(frame: :manufacturer).group("part_number, manufacturers.name").order("manufacturers.name #{direction}")
 	end
 
 	def self.order_by_frame(direction)
-		joins(:frame).group("part_number").order("frames.name #{direction}")
+		joins(:frame).group("part_number, frames.name").order("frames.name #{direction}")
 	end
 
 	def self.order_by_rating(direction)
@@ -105,7 +105,7 @@ class Bike < ApplicationRecord
 	end
 
 	def self.order_by_quantity(direction)
-		select("*, sum(is_available) as total_count").group("part_number").order("total_count #{direction}")
+		select("*, sum(is_available::int) as total_count").group("part_number, bikes.id").order("total_count #{direction}")
 	end
 
 	def self.ordered_by(category, direction="asc")
