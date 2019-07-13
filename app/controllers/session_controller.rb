@@ -7,8 +7,8 @@ class SessionController < ApplicationController
 		if !@user.valid?
 			@user.username = auth[:info][:name]
 			@user.email = auth[:info][:email]
-			@user.password_digest = BCrypt::Password.create(auth[:credentials][:token])
-			@user.password_digest_confirmation = BCrypt::Password.create(auth[:credentials][:token])
+			@user.password = BCrypt::Password.create(auth[:credentials][:token])
+			@user.password_confirmation = BCrypt::Password.create(auth[:credentials][:token])
 			@user.save
 		end
 		session_login(@user)

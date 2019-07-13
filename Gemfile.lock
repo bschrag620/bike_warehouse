@@ -253,7 +253,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
-  rails (~> 5.2.2)
+  rails (~> 5.2.3)
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
@@ -265,7 +265,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.2p198
+   ruby 2.6.3p62
 
 BUNDLED WITH
    1.17.3
