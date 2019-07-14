@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+  # home page
+  get '/', to: 'session#index', as: 'root'
+
   get 'reviews/create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   	resources :bikes, only: [:show, :index]
@@ -65,10 +69,6 @@ Rails.application.routes.draw do
 	# purchase routes
 	#sresources :purchases, only: [:new, :create, :edit, :update]
 	
-
-	# home page
-	root to: 'session#index', as: 'root'
-
 	# address routes
 	resources :addresses, only: [:new, :create]
 
