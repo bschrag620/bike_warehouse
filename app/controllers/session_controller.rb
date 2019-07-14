@@ -8,9 +8,9 @@ class SessionController < ApplicationController
 			@user.username = auth[:info][:name]
 			@user.email = auth[:info][:email]
 			@user.password = BCrypt::Password.create(auth[:credentials][:token])
-			@user.password_confirmation = BCrypt::Password.create(auth[:credentials][:token])
 			@user.save
 		end
+
 		session_login(@user)
 
 		redirect_to root_path
