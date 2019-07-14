@@ -6,6 +6,8 @@ class Admin::FramesController < Admin::BaseController
 		if !params[:redirect].nil?
 			set_redirect(params[:redirect])
 		end
+
+		if @frame
 			flash_destroy(@frame.name)
 			@frame.destroy
 			if redirect?
